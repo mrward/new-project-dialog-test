@@ -34,12 +34,13 @@ namespace NewProjectDialogTest
 	{
 		Gdk.Color blueBackgroundColor = new Gdk.Color (54, 155, 220);
 		Gdk.Color whiteColor = new Gdk.Color (255, 255, 255);
+		Gdk.Color categoriesBackgroundColor = new Gdk.Color (227, 227, 227);
 
 		void Build ()
 		{
 			BorderWidth = 0;
-			DefaultWidth = 930;
-			DefaultHeight = 540;
+			DefaultWidth = 900;
+			DefaultHeight = 560;
 
 			Modal = true;
 			Name = "NewProjectDialog";
@@ -65,10 +66,19 @@ namespace NewProjectDialogTest
 
 			VBox.PackStart (topLabelEventBox, false, false, 0);
 
+			// Main templates section.
 			var centreVBox = new VBox ();
-			var label = new Label ();
-			centreVBox.PackEnd (label, true, true, 0);
 			VBox.PackStart (centreVBox, true, true, 0);
+			var templatesHBox = new HBox ();
+			var label = new Label ();
+			templatesHBox.PackEnd (label, true, true, 0);
+			centreVBox.PackEnd (templatesHBox, true, true, 0);
+
+			// Template categories.
+			var categoriesEventBox = new EventBox ();
+			categoriesEventBox.ModifyBg (StateType.Normal, categoriesBackgroundColor);
+			categoriesEventBox.WidthRequest = 240;
+			templatesHBox.PackEnd (categoriesEventBox, false, false, 0);
 
 			// Buttons at bottom of dialog.
 			var bottomHBox = new HBox ();
@@ -76,16 +86,17 @@ namespace NewProjectDialogTest
 
 			// Cancel button - bottom left.
 			var cancelButtonBox = new HButtonBox ();
-			cancelButtonBox.BorderWidth = 15;
+			cancelButtonBox.BorderWidth = 14;
 			var cancelButton = new Button ();
-			cancelButton.Label = Catalog.GetString ("Cancel");
+			cancelButton.Label = "gtk-cancel";
+			cancelButton.UseStock = true;
 			cancelButtonBox.PackStart (cancelButton, false, false, 0);
 			bottomHBox.PackStart (cancelButtonBox, false, false, 0);
 
 			// Previous button - bottom right.
 			var previousNextButtonBox = new HButtonBox ();
-			previousNextButtonBox.BorderWidth = 15;
-			previousNextButtonBox.Spacing = 10;
+			previousNextButtonBox.BorderWidth = 14;
+			previousNextButtonBox.Spacing = 15;
 			bottomHBox.PackStart (previousNextButtonBox);
 			previousNextButtonBox.Layout = ButtonBoxStyle.End;
 
