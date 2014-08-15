@@ -37,6 +37,7 @@ namespace NewProjectDialogTest
 		Gdk.Color categoriesBackgroundColor = new Gdk.Color (227, 227, 227);
 		Gdk.Color templateListBackgroundColor = new Gdk.Color (242, 242, 242);
 		Gdk.Color templateBackgroundColor = new Gdk.Color (255, 255, 255);
+		Gdk.Color templateSectionSeparatorColor = new Gdk.Color (208, 208, 208);
 
 		void Build ()
 		{
@@ -51,7 +52,7 @@ namespace NewProjectDialogTest
 
 			// Top banner of dialog.
 			var topLabelEventBox = new EventBox ();
-			topLabelEventBox.HeightRequest = 55;
+			topLabelEventBox.HeightRequest = 53;
 			topLabelEventBox.ModifyBg (StateType.Normal, blueBackgroundColor);
 			topLabelEventBox.ModifyFg (StateType.Normal, new Gdk.Color (255, 255, 255));
 			topLabelEventBox.BorderWidth = 0;
@@ -91,6 +92,12 @@ namespace NewProjectDialogTest
 			templateEventBox.ModifyBg (StateType.Normal, templateBackgroundColor);
 			templatesHBox.PackStart (templateEventBox, true, true, 0);
 
+			// Template - button separator.
+			var templateSectionSeparatorEventBox = new EventBox ();
+			templateSectionSeparatorEventBox.HeightRequest = 1;
+			templateSectionSeparatorEventBox.ModifyBg (StateType.Normal, templateSectionSeparatorColor);
+			VBox.PackStart (templateSectionSeparatorEventBox, false, false, 0);
+
 			// Buttons at bottom of dialog.
 			var bottomHBox = new HBox ();
 			VBox.PackStart (bottomHBox, false, false, 0);
@@ -107,7 +114,7 @@ namespace NewProjectDialogTest
 			// Previous button - bottom right.
 			var previousNextButtonBox = new HButtonBox ();
 			previousNextButtonBox.BorderWidth = 14;
-			previousNextButtonBox.Spacing = 15;
+			previousNextButtonBox.Spacing = 9;
 			bottomHBox.PackStart (previousNextButtonBox);
 			previousNextButtonBox.Layout = ButtonBoxStyle.End;
 
