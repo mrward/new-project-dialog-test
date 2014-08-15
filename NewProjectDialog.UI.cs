@@ -35,6 +35,8 @@ namespace NewProjectDialogTest
 		Gdk.Color blueBackgroundColor = new Gdk.Color (54, 155, 220);
 		Gdk.Color whiteColor = new Gdk.Color (255, 255, 255);
 		Gdk.Color categoriesBackgroundColor = new Gdk.Color (227, 227, 227);
+		Gdk.Color templateListBackgroundColor = new Gdk.Color (242, 242, 242);
+		Gdk.Color templateBackgroundColor = new Gdk.Color (255, 255, 255);
 
 		void Build ()
 		{
@@ -70,15 +72,24 @@ namespace NewProjectDialogTest
 			var centreVBox = new VBox ();
 			VBox.PackStart (centreVBox, true, true, 0);
 			var templatesHBox = new HBox ();
-			var label = new Label ();
-			templatesHBox.PackEnd (label, true, true, 0);
 			centreVBox.PackEnd (templatesHBox, true, true, 0);
 
 			// Template categories.
 			var categoriesEventBox = new EventBox ();
 			categoriesEventBox.ModifyBg (StateType.Normal, categoriesBackgroundColor);
-			categoriesEventBox.WidthRequest = 240;
-			templatesHBox.PackEnd (categoriesEventBox, false, false, 0);
+			categoriesEventBox.WidthRequest = 220;
+			templatesHBox.PackStart (categoriesEventBox, false, false, 0);
+
+			// Template categories.
+			var templateListEventBox = new EventBox ();
+			templateListEventBox.ModifyBg (StateType.Normal, templateListBackgroundColor);
+			templateListEventBox.WidthRequest = 217;
+			templatesHBox.PackStart (templateListEventBox, false, false, 0);
+
+			// Template
+			var templateEventBox = new EventBox ();
+			templateEventBox.ModifyBg (StateType.Normal, templateBackgroundColor);
+			templatesHBox.PackStart (templateEventBox, true, true, 0);
 
 			// Buttons at bottom of dialog.
 			var bottomHBox = new HBox ();
