@@ -1,5 +1,5 @@
 ﻿//
-// ProjectTemplateCategory.cs
+// SolutionTemplate.cs
 //
 // Author:
 //       Matt Ward <matt.ward@xamarin.com>
@@ -24,16 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-using System.Collections.Generic;
+
+using System;
 
 namespace NewProjectDialogTest
 {
-	public class TemplateCategory
+	public class SolutionTemplate
 	{
-		List<TemplateCategory> categories = new List<TemplateCategory> ();
-		List<SolutionTemplate> templates = new List<SolutionTemplate> ();
-
-		public TemplateCategory (string id, string name, string iconId)
+		public SolutionTemplate (string id, string name, string iconId)
 		{
 			Id = id;
 			Name = name;
@@ -43,24 +41,8 @@ namespace NewProjectDialogTest
 		public string Id { get; private set; }
 		public string Name { get; private set; }
 		public string IconId { get; private set; }
-
-		public void AddCategory (TemplateCategory category)
-		{
-			categories.Add (category);
-		}
-
-		public IEnumerable<TemplateCategory> Categories {
-			get { return categories; }
-		}
-
-		public IEnumerable<SolutionTemplate> Templates {
-			get { return templates; }
-		}
-
-		public void AddTemplate (SolutionTemplate template)
-		{
-			templates.Add (template);
-		}
+		public string Description { get; set; }
+		public string LargeImageId { get; set; }
 	}
 }
 

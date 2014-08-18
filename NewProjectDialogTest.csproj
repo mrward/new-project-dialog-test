@@ -69,8 +69,12 @@
     <EmbeddedResource Include="Images\OtherCategory.png">
       <LogicalName>md-other-category</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\Template.png" />
-    <EmbeddedResource Include="Images\TemplateBackground.png" />
+    <EmbeddedResource Include="Images\Template.png">
+      <LogicalName>md-project-template</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\TemplateBackground.png">
+      <LogicalName>md-template-background</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -89,6 +93,7 @@
     <Compile Include="INewProjectController.cs" />
     <Compile Include="TemplateCategory.cs" />
     <Compile Include="NewProjectController.cs" />
+    <Compile Include="SolutionTemplate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

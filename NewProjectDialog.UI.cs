@@ -40,8 +40,17 @@ namespace NewProjectDialogTest
 		Color templateBackgroundColor = new Color (255, 255, 255);
 		Color templateSectionSeparatorColor = new Gdk.Color (208, 208, 208);
 		TreeView templateCategoriesTreeView;
+		const int TemplateCategoryColumn = 2;
 		ListStore templateCategoriesListStore =
 			new ListStore(typeof (Pixbuf), typeof (string), typeof(TemplateCategory));
+		TreeView templatesTreeView;
+		const int TemplateColumn = 2;
+		ListStore templatesListStore =
+			new ListStore(typeof (Pixbuf), typeof (string), typeof(SolutionTemplate));
+		VBox templateVBox;
+		Gtk.Image templateImage;
+		Label templateNameLabel;
+		Label templateDescriptionLabel;
 
 		void Build ()
 		{
@@ -87,7 +96,7 @@ namespace NewProjectDialogTest
 
 			// Template categories tree view.
 			var templateCategoriesVBox = new VBox ();
-			templateCategoriesVBox.BorderWidth = 10;
+			templateCategoriesVBox.BorderWidth = 0;
 			templateCategoriesVBox.WidthRequest = 220;
 			templateCategoriesTreeView = new TreeView ();
 			templateCategoriesTreeView.BorderWidth = 0;
@@ -109,10 +118,44 @@ namespace NewProjectDialogTest
 			templateListEventBox.WidthRequest = 217;
 			templatesHBox.PackStart (templateListEventBox, false, false, 0);
 
+			// Templates tree view.
+			var templatesVBox = new VBox ();
+			templatesTreeView = new TreeView ();
+			templatesTreeView.HeadersVisible = false;
+			templatesTreeView.Model = templatesListStore;
+			templatesTreeView.AppendColumn (CreateTemplateListTreeViewColumn ());
+			templatesVBox.PackStart (templatesTreeView, false, false, 0);
+			templateListEventBox.Add (templatesVBox);
+
 			// Template
 			var templateEventBox = new EventBox ();
 			templateEventBox.ModifyBg (StateType.Normal, templateBackgroundColor);
 			templatesHBox.PackStart (templateEventBox, true, true, 0);
+			templateVBox = new VBox ();
+			templateVBox.Visible = false;
+			templateEventBox.Add (templateVBox);
+
+			// Template large image.
+			templateImage = new Gtk.Image ();
+			templateImage.HeightRequest = 300;
+			templateVBox.PackStart (templateImage, false, false, 20);
+
+			// Template description.
+			var templateNameHBox = new HBox ();
+			templateNameLabel = new Label ();
+			templateNameHBox.PackStart (templateNameLabel, false, false, 40);
+			var templateNamePaddingLabel = new Label ();
+			templateNameHBox.PackStart (templateNamePaddingLabel, true, true, 0);
+			templateVBox.PackStart (templateNameHBox, false, false, 0);
+			var templateDescriptionHBox = new HBox ();
+			templateDescriptionLabel = new Label ();
+			templateDescriptionLabel.Wrap = true;
+			templateDescriptionLabel.WidthRequest = 400;
+			templateDescriptionHBox.PackStart (templateDescriptionLabel, false, false, 40);
+			var templateDescriptionPaddingLabel = new Label ();
+			templateDescriptionHBox.PackStart (templateDescriptionPaddingLabel, true, true, 0);
+			templateVBox.PackStart (templateDescriptionHBox, true, true, 10);
+			templateVBox.PackStart (new Label (), true, true, 0);
 
 			// Template - button separator.
 			var templateSectionSeparatorEventBox = new EventBox ();
@@ -172,6 +215,24 @@ namespace NewProjectDialogTest
 
 			var textRenderer = new CellRendererText ();
 			textRenderer.CellBackgroundGdk = categoriesBackgroundColor;
+
+			column.PackStart (textRenderer, true);
+			column.AddAttribute (textRenderer, "markup", column: 1);
+
+			return column;
+		}
+
+		TreeViewColumn CreateTemplateListTreeViewColumn ()
+		{
+			var column = new TreeViewColumn ();
+
+			var iconRenderer = new CellRendererPixbuf ();
+			column.PackStart (iconRenderer, false);
+			iconRenderer.CellBackgroundGdk = templateListBackgroundColor;
+			column.AddAttribute (iconRenderer, "pixbuf", column: 0);
+
+			var textRenderer = new CellRendererText ();
+			textRenderer.CellBackgroundGdk = templateListBackgroundColor;
 
 			column.PackStart (textRenderer, true);
 			column.AddAttribute (textRenderer, "markup", column: 1);

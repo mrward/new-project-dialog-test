@@ -46,7 +46,21 @@ namespace NewProjectDialogTest
 		{
 			templateCategories = new List<TemplateCategory> ();
 
+			var generalCategory = new TemplateCategory ("general", "General", null);
+			var template = new SolutionTemplate ("blank-app-portable", "Blank App (Xamarin.Forms Portable)", "md-project-template") {
+				Description = "Blank App (Xamarin.Forms Portable). More text and some more. Blah, blah, blah, blah, more text that should wrap. More and more. More and even more",
+				LargeImageId = "md-template-background"
+			};
+			generalCategory.AddTemplate (template);
+			template = new SolutionTemplate ("blank-app-shared", "Blank App (Xamarin.Forms Shared)", "md-project-template") {
+				Description = "Blank App (Xamarin.Forms Shared)",
+				LargeImageId = "md-template-background"
+			};
+			generalCategory.AddTemplate (template);
+
 			var appCategory = new TemplateCategory ("app", "App", null);
+			appCategory.AddCategory (generalCategory);
+
 			var libraryCategory = new TemplateCategory ("library", "Library", null);
 			var testsCategory = new TemplateCategory ("test", "Tests", null);
 

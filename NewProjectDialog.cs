@@ -26,6 +26,7 @@
 //
 
 using System;
+using Gtk;
 
 namespace NewProjectDialogTest
 {
@@ -36,6 +37,19 @@ namespace NewProjectDialogTest
 		public NewProjectDialog ()
 		{
 			Build ();
+
+			templateCategoriesTreeView.Selection.Changed += TemplateCategoriesTreeViewSelectionChanged;
+			templatesTreeView.Selection.Changed += TemplatesTreeViewSelectionChanged;
+		}
+
+		void TemplateCategoriesTreeViewSelectionChanged (object sender, EventArgs e)
+		{
+			ShowTemplatesForSelectedCategory ();
+		}
+
+		void TemplatesTreeViewSelectionChanged (object sender, EventArgs e)
+		{
+			ShowSelectedTemplate ();
 		}
 
 		public void RegisterController (INewProjectController controller)
@@ -57,7 +71,7 @@ namespace NewProjectDialogTest
 				new Gdk.Pixbuf (typeof (NewProjectDialog).Assembly, category.IconId),
 				MarkupTopLevelCategoryName (category.Name),
 				category);
-				
+
 			foreach (TemplateCategory subCategory in category.Categories) {
 				AddSubTemplateCategory (subCategory);
 			}
@@ -74,6 +88,80 @@ namespace NewProjectDialogTest
 		static string MarkupTopLevelCategoryName (string name)
 		{
 			return "<span font_weight='bold' size='larger'>" + name + "</span>";
+		}
+
+		void ShowTemplatesForSelectedCategory ()
+		{
+			ClearSelectedCategoryInformation ();
+
+			TemplateCategory category = GetSelectedTemplateCategory ();
+			if ((category != null) && (category.IconId == null)) {
+				ShowTemplatesForCategory (category);
+			}
+		}
+
+		void ClearSelectedCategoryInformation ()
+		{
+			templatesListStore.Clear ();
+		}
+
+		TemplateCategory GetSelectedTemplateCategory ()
+		{
+			TreeIter item;
+			if (templateCategoriesTreeView.Selection.GetSelected (out item)) {
+				return templateCategoriesListStore.GetValue (item, TemplateCategoryColumn) as TemplateCategory;
+			}
+			return null;
+		}
+
+		void ShowTemplatesForCategory (TemplateCategory category)
+		{
+			foreach (TemplateCategory subCategory in category.Categories) {
+				templatesListStore.AppendValues (
+					null,
+					MarkupTopLevelCategoryName (subCategory.Name),
+					null);
+
+				foreach (SolutionTemplate template in subCategory.Templates) {
+					templatesListStore.AppendValues (
+						new Gdk.Pixbuf (typeof (NewProjectDialog).Assembly, template.IconId),
+						template.Name,
+						template);
+				}
+			}
+		}
+
+		void ShowSelectedTemplate ()
+		{
+			ClearSelectedTemplateInformation ();
+
+			SolutionTemplate template = GetSelectedTemplate ();
+			if (template != null) {
+				ShowTemplate (template);
+			}
+		}
+
+		void ClearSelectedTemplateInformation ()
+		{
+			templateVBox.Visible = false;
+		}
+
+		SolutionTemplate GetSelectedTemplate ()
+		{
+			TreeIter item;
+			if (templatesTreeView.Selection.GetSelected (out item)) {
+				return templatesListStore.GetValue (item, TemplateColumn) as SolutionTemplate;
+			}
+			return null;
+		}
+
+		void ShowTemplate (SolutionTemplate template)
+		{
+			templateNameLabel.Markup = MarkupTopLevelCategoryName (template.Name);
+			templateDescriptionLabel.Text = template.Description;
+			templateImage.Pixbuf = new Gdk.Pixbuf (typeof(NewProjectDialog).Assembly, template.LargeImageId);
+			templateVBox.Visible = true;
+			templateVBox.ShowAll ();
 		}
 	}
 }
