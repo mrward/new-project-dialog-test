@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 //
 
+using Gdk;
 using Gtk;
 using Mono.Unix;
 
@@ -32,12 +33,15 @@ namespace NewProjectDialogTest
 {
 	public partial class NewProjectDialog : Dialog
 	{
-		Gdk.Color blueBackgroundColor = new Gdk.Color (54, 155, 220);
-		Gdk.Color whiteColor = new Gdk.Color (255, 255, 255);
-		Gdk.Color categoriesBackgroundColor = new Gdk.Color (227, 227, 227);
-		Gdk.Color templateListBackgroundColor = new Gdk.Color (242, 242, 242);
-		Gdk.Color templateBackgroundColor = new Gdk.Color (255, 255, 255);
-		Gdk.Color templateSectionSeparatorColor = new Gdk.Color (208, 208, 208);
+		Color blueBackgroundColor = new Color (54, 155, 220);
+		Color whiteColor = new Color (255, 255, 255);
+		Color categoriesBackgroundColor = new Color (227, 227, 227);
+		Color templateListBackgroundColor = new Color (242, 242, 242);
+		Color templateBackgroundColor = new Color (255, 255, 255);
+		Color templateSectionSeparatorColor = new Gdk.Color (208, 208, 208);
+		TreeView templateCategoriesTreeView;
+		ListStore templateCategoriesListStore =
+			new ListStore(typeof (Pixbuf), typeof (string), typeof(TemplateCategory));
 
 		void Build ()
 		{
@@ -81,7 +85,25 @@ namespace NewProjectDialogTest
 			categoriesEventBox.WidthRequest = 220;
 			templatesHBox.PackStart (categoriesEventBox, false, false, 0);
 
-			// Template categories.
+			// Template categories tree view.
+			var templateCategoriesVBox = new VBox ();
+			templateCategoriesVBox.BorderWidth = 10;
+			templateCategoriesVBox.WidthRequest = 220;
+			templateCategoriesTreeView = new TreeView ();
+			templateCategoriesTreeView.BorderWidth = 0;
+			templateCategoriesTreeView.HeadersVisible = false;
+			templateCategoriesTreeView.Model = templateCategoriesListStore;
+			templateCategoriesTreeView.AppendColumn (CreateTemplateCategoriesTreeViewColumn ());
+			templateCategoriesVBox.PackStart (templateCategoriesTreeView, false, false, 0);
+
+			// Bottom of template categories tree view.
+			var templateCategoriesBottomFillerEventBox = new EventBox ();
+			templateCategoriesBottomFillerEventBox.BorderWidth = 0;
+			templateCategoriesBottomFillerEventBox.ModifyBg (StateType.Normal, categoriesBackgroundColor);
+			templateCategoriesVBox.PackStart (templateCategoriesBottomFillerEventBox, true, true, 0);
+			categoriesEventBox.Add (templateCategoriesVBox);
+
+			// Templates.
 			var templateListEventBox = new EventBox ();
 			templateListEventBox.ModifyBg (StateType.Normal, templateListBackgroundColor);
 			templateListEventBox.WidthRequest = 217;
@@ -137,6 +159,24 @@ namespace NewProjectDialogTest
 			Show ();
 
 			VBox.BorderWidth = 0;
+		}
+
+		TreeViewColumn CreateTemplateCategoriesTreeViewColumn ()
+		{
+			var column = new TreeViewColumn ();
+
+			var iconRenderer = new CellRendererPixbuf ();
+			column.PackStart (iconRenderer, false);
+			iconRenderer.CellBackgroundGdk = categoriesBackgroundColor;
+			column.AddAttribute (iconRenderer, "pixbuf", column: 0);
+
+			var textRenderer = new CellRendererText ();
+			textRenderer.CellBackgroundGdk = categoriesBackgroundColor;
+
+			column.PackStart (textRenderer, true);
+			column.AddAttribute (textRenderer, "markup", column: 1);
+
+			return column;
 		}
 	}
 }

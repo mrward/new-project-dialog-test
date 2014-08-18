@@ -1,5 +1,5 @@
 ﻿//
-// NewProjectDialog.cs
+// ProjectTemplateCategory.cs
 //
 // Author:
 //       Matt Ward <matt.ward@xamarin.com>
@@ -24,56 +24,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-
-using System;
+using System.Collections.Generic;
 
 namespace NewProjectDialogTest
 {
-	public partial class NewProjectDialog : Gtk.Dialog
+	public class TemplateCategory
 	{
-		INewProjectController controller;
+		List<TemplateCategory> categories = new List<TemplateCategory> ();
 
-		public NewProjectDialog ()
+		public TemplateCategory (string id, string name, string iconId)
 		{
-			Build ();
+			Id = id;
+			Name = name;
+			IconId = iconId;
 		}
 
-		public void RegisterController (INewProjectController controller)
+		public string Id { get; private set; }
+		public string Name { get; private set; }
+		public string IconId { get; private set; }
+
+		public void AddCategory (TemplateCategory category)
 		{
-			this.controller = controller;
-			LoadTemplates ();
+			categories.Add (category);
 		}
 
-		void LoadTemplates ()
-		{
-			foreach (TemplateCategory category in controller.TemplateCategories) {
-				AddTopLevelTemplateCategory (category);
-			}
-		}
-
-		void AddTopLevelTemplateCategory (TemplateCategory category)
-		{
-			templateCategoriesListStore.AppendValues (
-				new Gdk.Pixbuf (typeof (NewProjectDialog).Assembly, category.IconId),
-				MarkupTopLevelCategoryName (category.Name),
-				category);
-				
-			foreach (TemplateCategory subCategory in category.Categories) {
-				AddSubTemplateCategory (subCategory);
-			}
-		}
-
-		void AddSubTemplateCategory (TemplateCategory category)
-		{
-			templateCategoriesListStore.AppendValues (
-				null,
-				category.Name,
-				category);
-		}
-
-		static string MarkupTopLevelCategoryName (string name)
-		{
-			return "<span font_weight='bold' size='larger'>" + name + "</span>";
+		public IEnumerable<TemplateCategory> Categories {
+			get { return categories; }
 		}
 	}
 }

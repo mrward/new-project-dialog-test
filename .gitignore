@@ -153,3 +153,4 @@ TestResult.xml
 
 # SQLite Crap
 SQLite.Interop.dll
+*.userprefs

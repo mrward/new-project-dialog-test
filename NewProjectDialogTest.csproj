@@ -54,6 +54,23 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Images\CrossPlatformCategory.png">
+      <LogicalName>md-crossplatform-category</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\iOSCategory.png">
+      <LogicalName>md-ios-category</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\AndroidCategory.png">
+      <LogicalName>md-android-category</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\OSXCategory.png">
+      <LogicalName>md-osx-category</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\OtherCategory.png">
+      <LogicalName>md-other-category</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\Template.png" />
+    <EmbeddedResource Include="Images\TemplateBackground.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -61,12 +78,20 @@
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NewProjectDialog.cs" />
+    <Compile Include="NewProjectDialog.cs">
+      <LogicalName>CrossPlatformCategory.png</LogicalName>
+    </Compile>
     <Compile Include="NewProjectDialog.UI.cs">
       <DependentUpon>NewProjectDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="TestDialog.cs" />
     <Compile Include="gtk-gui\NewProjectDialogTest.TestDialog.cs" />
+    <Compile Include="INewProjectController.cs" />
+    <Compile Include="TemplateCategory.cs" />
+    <Compile Include="NewProjectController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
 </Project>

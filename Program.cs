@@ -36,10 +36,16 @@ namespace NewProjectDialogTest
 			Application.Init ();
 			//MainWindow win = new MainWindow ();
 			//win.Show ();
-			var dialog = new NewProjectDialog ();
-			//dialog.WindowPosition = WindowPosition.CenterAlways;
-			dialog.Run ();
+			ShowNewProjectDialog ();
 			//Application.Run ();
+		}
+
+		static void ShowNewProjectDialog ()
+		{
+			var controller = new NewProjectController ();
+			var dialog = new NewProjectDialog ();
+			dialog.RegisterController (controller);
+			dialog.Run ();
 		}
 	}
 }

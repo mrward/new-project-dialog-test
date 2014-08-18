@@ -1,5 +1,5 @@
-﻿//
-// NewProjectDialog.cs
+//
+// INewProjectController.cs
 //
 // Author:
 //       Matt Ward <matt.ward@xamarin.com>
@@ -25,56 +25,13 @@
 // THE SOFTWARE.
 //
 
-using System;
+using System.Collections.Generic;
 
 namespace NewProjectDialogTest
 {
-	public partial class NewProjectDialog : Gtk.Dialog
+	public interface INewProjectController
 	{
-		INewProjectController controller;
-
-		public NewProjectDialog ()
-		{
-			Build ();
-		}
-
-		public void RegisterController (INewProjectController controller)
-		{
-			this.controller = controller;
-			LoadTemplates ();
-		}
-
-		void LoadTemplates ()
-		{
-			foreach (TemplateCategory category in controller.TemplateCategories) {
-				AddTopLevelTemplateCategory (category);
-			}
-		}
-
-		void AddTopLevelTemplateCategory (TemplateCategory category)
-		{
-			templateCategoriesListStore.AppendValues (
-				new Gdk.Pixbuf (typeof (NewProjectDialog).Assembly, category.IconId),
-				MarkupTopLevelCategoryName (category.Name),
-				category);
-				
-			foreach (TemplateCategory subCategory in category.Categories) {
-				AddSubTemplateCategory (subCategory);
-			}
-		}
-
-		void AddSubTemplateCategory (TemplateCategory category)
-		{
-			templateCategoriesListStore.AppendValues (
-				null,
-				category.Name,
-				category);
-		}
-
-		static string MarkupTopLevelCategoryName (string name)
-		{
-			return "<span font_weight='bold' size='larger'>" + name + "</span>";
-		}
+		IEnumerable<TemplateCategory> TemplateCategories { get; }
 	}
 }
 
