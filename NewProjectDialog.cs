@@ -40,6 +40,7 @@ namespace NewProjectDialogTest
 
 			templateCategoriesTreeView.Selection.Changed += TemplateCategoriesTreeViewSelectionChanged;
 			templatesTreeView.Selection.Changed += TemplatesTreeViewSelectionChanged;
+			cancelButton.Clicked += CancelButtonClicked;
 		}
 
 		void TemplateCategoriesTreeViewSelectionChanged (object sender, EventArgs e)
@@ -52,10 +53,16 @@ namespace NewProjectDialogTest
 			ShowSelectedTemplate ();
 		}
 
+		void CancelButtonClicked (object sender, EventArgs e)
+		{
+			Destroy ();
+		}
+
 		public void RegisterController (INewProjectController controller)
 		{
 			this.controller = controller;
 			LoadTemplates ();
+			SelectFirstSubTemplateCategory ();
 		}
 
 		void LoadTemplates ()
@@ -97,6 +104,7 @@ namespace NewProjectDialogTest
 			TemplateCategory category = GetSelectedTemplateCategory ();
 			if ((category != null) && (category.IconId == null)) {
 				ShowTemplatesForCategory (category);
+				SelectFirstTemplate ();
 			}
 		}
 
@@ -162,6 +170,22 @@ namespace NewProjectDialogTest
 			templateImage.Pixbuf = new Gdk.Pixbuf (typeof(NewProjectDialog).Assembly, template.LargeImageId);
 			templateVBox.Visible = true;
 			templateVBox.ShowAll ();
+		}
+
+		void SelectFirstSubTemplateCategory ()
+		{
+			TreeIter iter = TreeIter.Zero;
+			if (templateCategoriesListStore.IterNthChild (out iter, 1)) {
+				templateCategoriesTreeView.Selection.SelectIter (iter);
+			}
+		}
+
+		void SelectFirstTemplate ()
+		{
+			TreeIter iter = TreeIter.Zero;
+			if (templatesListStore.IterNthChild (out iter, 1)) {
+				templatesTreeView.Selection.SelectIter (iter);
+			}
 		}
 	}
 }

@@ -39,6 +39,8 @@ namespace NewProjectDialogTest
 		Color templateListBackgroundColor = new Color (242, 242, 242);
 		Color templateBackgroundColor = new Color (255, 255, 255);
 		Color templateSectionSeparatorColor = new Gdk.Color (208, 208, 208);
+
+		Button cancelButton;
 		TreeView templateCategoriesTreeView;
 		const int TemplateCategoryColumn = 2;
 		ListStore templateCategoriesListStore =
@@ -67,7 +69,7 @@ namespace NewProjectDialogTest
 			var topLabelEventBox = new EventBox ();
 			topLabelEventBox.HeightRequest = 53;
 			topLabelEventBox.ModifyBg (StateType.Normal, blueBackgroundColor);
-			topLabelEventBox.ModifyFg (StateType.Normal, new Gdk.Color (255, 255, 255));
+			topLabelEventBox.ModifyFg (StateType.Normal, whiteColor);
 			topLabelEventBox.BorderWidth = 0;
 
 			var chooseTemplateLabel = new Label ();
@@ -170,7 +172,7 @@ namespace NewProjectDialogTest
 			// Cancel button - bottom left.
 			var cancelButtonBox = new HButtonBox ();
 			cancelButtonBox.BorderWidth = 14;
-			var cancelButton = new Button ();
+			cancelButton = new Button ();
 			cancelButton.Label = "gtk-cancel";
 			cancelButton.UseStock = true;
 			cancelButtonBox.PackStart (cancelButton, false, false, 0);
