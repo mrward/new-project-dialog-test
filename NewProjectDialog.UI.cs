@@ -109,19 +109,20 @@ namespace NewProjectDialogTest
 			templatesHBox.PackStart (templateCategoriesVBox, false, false, 0);
 
 			// Templates.
-			var templateListEventBox = new EventBox ();
-			templateListEventBox.ModifyBg (StateType.Normal, templateListBackgroundColor);
-			templateListEventBox.WidthRequest = 217;
-			templatesHBox.PackStart (templateListEventBox, false, false, 0);
+			var templatesVBox = new VBox ();
+			templatesVBox.WidthRequest = 217;
+			templatesHBox.PackStart (templatesVBox, false, false, 0);
+			var templatesScrolledWindow = new ScrolledWindow ();
+			templatesScrolledWindow.HscrollbarPolicy = PolicyType.Never;
 
 			// Templates tree view.
-			var templatesVBox = new VBox ();
 			templatesTreeView = new TreeView ();
 			templatesTreeView.HeadersVisible = false;
 			templatesTreeView.Model = templatesListStore;
+			templatesTreeView.ModifyBase (StateType.Normal, templateListBackgroundColor);
 			templatesTreeView.AppendColumn (CreateTemplateListTreeViewColumn ());
-			templatesVBox.PackStart (templatesTreeView, false, false, 0);
-			templateListEventBox.Add (templatesVBox);
+			templatesScrolledWindow.Add (templatesTreeView);
+			templatesVBox.PackStart (templatesScrolledWindow, true, true, 0);
 
 			// Template
 			var templateEventBox = new EventBox ();
