@@ -6,9 +6,53 @@ namespace NewProjectDialogTest
 	{
 		private global::Gtk.VBox vbox2;
 		
-		private global::Gtk.ScrolledWindow scrolledwindow1;
+		private global::Gtk.Table projectConfigurationTable;
 		
-		private global::Gtk.TreeView treeview1;
+		private global::Gtk.Button browseButton;
+		
+		private global::Gtk.CheckButton createGitIgnoreFileCheckBox;
+		
+		private global::Gtk.CheckButton createProjectWithinSolutionDirectoryCheckBox;
+		
+		private global::Gtk.Label label6;
+		
+		private global::Gtk.Label label7;
+		
+		private global::Gtk.HBox locationLabelHBox;
+		
+		private global::Gtk.Label locationPaddingLabel;
+		
+		private global::Gtk.Label locationLabel;
+		
+		private global::Gtk.Entry locationTextBox;
+		
+		private global::Gtk.HBox projectNameLabelHBox;
+		
+		private global::Gtk.Label projectNamePaddingLabel;
+		
+		private global::Gtk.Label projectNameLabel;
+		
+		private global::Gtk.Entry projectNameTextBox;
+		
+		private global::Gtk.Label solutionLocationSpacerLabel1;
+		
+		private global::Gtk.Label solutionLocationSpacerLabel2;
+		
+		private global::Gtk.HBox solutionNameLabelHBox;
+		
+		private global::Gtk.Label solutionNamePaddingLabel;
+		
+		private global::Gtk.Label solutionNameLabel;
+		
+		private global::Gtk.Entry solutionNameTextBox;
+		
+		private global::Gtk.CheckButton useGitCheckBox;
+		
+		private global::Gtk.HBox versionControlLabelHBox;
+		
+		private global::Gtk.Label versionControlPaddingLabel;
+		
+		private global::Gtk.Label versionControlLabel;
 		
 		private global::Gtk.Button buttonCancel;
 		
@@ -29,27 +73,266 @@ namespace NewProjectDialogTest
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.scrolledwindow1 = new global::Gtk.ScrolledWindow ();
-			this.scrolledwindow1.CanFocus = true;
-			this.scrolledwindow1.Name = "scrolledwindow1";
-			this.scrolledwindow1.ShadowType = ((global::Gtk.ShadowType)(1));
-			// Container child scrolledwindow1.Gtk.Container+ContainerChild
-			this.treeview1 = new global::Gtk.TreeView ();
-			this.treeview1.CanFocus = true;
-			this.treeview1.Name = "treeview1";
-			this.scrolledwindow1.Add (this.treeview1);
-			this.vbox2.Add (this.scrolledwindow1);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.scrolledwindow1]));
-			w3.Position = 0;
+			this.projectConfigurationTable = new global::Gtk.Table (((uint)(10)), ((uint)(3)), false);
+			this.projectConfigurationTable.Name = "projectConfigurationTable";
+			this.projectConfigurationTable.RowSpacing = ((uint)(6));
+			this.projectConfigurationTable.ColumnSpacing = ((uint)(6));
+			this.projectConfigurationTable.BorderWidth = ((uint)(20));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.browseButton = new global::Gtk.Button ();
+			this.browseButton.CanFocus = true;
+			this.browseButton.Name = "browseButton";
+			this.browseButton.UseUnderline = true;
+			this.browseButton.Label = global::Mono.Unix.Catalog.GetString ("Browse...");
+			this.projectConfigurationTable.Add (this.browseButton);
+			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.browseButton]));
+			w2.TopAttach = ((uint)(4));
+			w2.BottomAttach = ((uint)(5));
+			w2.LeftAttach = ((uint)(2));
+			w2.RightAttach = ((uint)(3));
+			w2.XOptions = ((global::Gtk.AttachOptions)(4));
+			w2.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.createGitIgnoreFileCheckBox = new global::Gtk.CheckButton ();
+			this.createGitIgnoreFileCheckBox.CanFocus = true;
+			this.createGitIgnoreFileCheckBox.Name = "createGitIgnoreFileCheckBox";
+			this.createGitIgnoreFileCheckBox.Label = global::Mono.Unix.Catalog.GetString ("Create a .gitignore file to ignore inessential files.");
+			this.createGitIgnoreFileCheckBox.Active = true;
+			this.createGitIgnoreFileCheckBox.DrawIndicator = true;
+			this.createGitIgnoreFileCheckBox.UseUnderline = true;
+			this.projectConfigurationTable.Add (this.createGitIgnoreFileCheckBox);
+			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.createGitIgnoreFileCheckBox]));
+			w3.TopAttach = ((uint)(9));
+			w3.BottomAttach = ((uint)(10));
+			w3.LeftAttach = ((uint)(1));
+			w3.RightAttach = ((uint)(3));
+			w3.XOptions = ((global::Gtk.AttachOptions)(4));
+			w3.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.createProjectWithinSolutionDirectoryCheckBox = new global::Gtk.CheckButton ();
+			this.createProjectWithinSolutionDirectoryCheckBox.CanFocus = true;
+			this.createProjectWithinSolutionDirectoryCheckBox.Name = "createProjectWithinSolutionDirectoryCheckBox";
+			this.createProjectWithinSolutionDirectoryCheckBox.Label = global::Mono.Unix.Catalog.GetString ("Create a project within the solution directory.");
+			this.createProjectWithinSolutionDirectoryCheckBox.Active = true;
+			this.createProjectWithinSolutionDirectoryCheckBox.DrawIndicator = true;
+			this.createProjectWithinSolutionDirectoryCheckBox.UseUnderline = true;
+			this.projectConfigurationTable.Add (this.createProjectWithinSolutionDirectoryCheckBox);
+			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.createProjectWithinSolutionDirectoryCheckBox]));
+			w4.TopAttach = ((uint)(5));
+			w4.BottomAttach = ((uint)(6));
+			w4.LeftAttach = ((uint)(1));
+			w4.RightAttach = ((uint)(3));
+			w4.XOptions = ((global::Gtk.AttachOptions)(4));
+			w4.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.label6 = new global::Gtk.Label ();
+			this.label6.Name = "label6";
+			this.projectConfigurationTable.Add (this.label6);
+			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.label6]));
+			w5.TopAttach = ((uint)(6));
+			w5.BottomAttach = ((uint)(7));
+			w5.XOptions = ((global::Gtk.AttachOptions)(4));
+			w5.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.label7 = new global::Gtk.Label ();
+			this.label7.Name = "label7";
+			this.projectConfigurationTable.Add (this.label7);
+			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.label7]));
+			w6.TopAttach = ((uint)(7));
+			w6.BottomAttach = ((uint)(8));
+			w6.XOptions = ((global::Gtk.AttachOptions)(4));
+			w6.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.locationLabelHBox = new global::Gtk.HBox ();
+			this.locationLabelHBox.Name = "locationLabelHBox";
+			this.locationLabelHBox.Spacing = 6;
+			// Container child locationLabelHBox.Gtk.Box+BoxChild
+			this.locationPaddingLabel = new global::Gtk.Label ();
+			this.locationPaddingLabel.Name = "locationPaddingLabel";
+			this.locationLabelHBox.Add (this.locationPaddingLabel);
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.locationLabelHBox [this.locationPaddingLabel]));
+			w7.Position = 0;
+			// Container child locationLabelHBox.Gtk.Box+BoxChild
+			this.locationLabel = new global::Gtk.Label ();
+			this.locationLabel.Name = "locationLabel";
+			this.locationLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Location");
+			this.locationLabel.Justify = ((global::Gtk.Justification)(1));
+			this.locationLabelHBox.Add (this.locationLabel);
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.locationLabelHBox [this.locationLabel]));
+			w8.Position = 1;
+			w8.Expand = false;
+			w8.Fill = false;
+			this.projectConfigurationTable.Add (this.locationLabelHBox);
+			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.locationLabelHBox]));
+			w9.TopAttach = ((uint)(4));
+			w9.BottomAttach = ((uint)(5));
+			w9.XOptions = ((global::Gtk.AttachOptions)(4));
+			w9.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.locationTextBox = new global::Gtk.Entry ();
+			this.locationTextBox.CanFocus = true;
+			this.locationTextBox.Name = "locationTextBox";
+			this.locationTextBox.IsEditable = true;
+			this.locationTextBox.InvisibleChar = '●';
+			this.projectConfigurationTable.Add (this.locationTextBox);
+			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.locationTextBox]));
+			w10.TopAttach = ((uint)(4));
+			w10.BottomAttach = ((uint)(5));
+			w10.LeftAttach = ((uint)(1));
+			w10.RightAttach = ((uint)(2));
+			w10.XOptions = ((global::Gtk.AttachOptions)(4));
+			w10.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.projectNameLabelHBox = new global::Gtk.HBox ();
+			this.projectNameLabelHBox.Name = "projectNameLabelHBox";
+			this.projectNameLabelHBox.Spacing = 6;
+			// Container child projectNameLabelHBox.Gtk.Box+BoxChild
+			this.projectNamePaddingLabel = new global::Gtk.Label ();
+			this.projectNamePaddingLabel.Name = "projectNamePaddingLabel";
+			this.projectNameLabelHBox.Add (this.projectNamePaddingLabel);
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.projectNameLabelHBox [this.projectNamePaddingLabel]));
+			w11.Position = 0;
+			// Container child projectNameLabelHBox.Gtk.Box+BoxChild
+			this.projectNameLabel = new global::Gtk.Label ();
+			this.projectNameLabel.Name = "projectNameLabel";
+			this.projectNameLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Project Name");
+			this.projectNameLabel.Justify = ((global::Gtk.Justification)(1));
+			this.projectNameLabelHBox.Add (this.projectNameLabel);
+			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.projectNameLabelHBox [this.projectNameLabel]));
+			w12.Position = 1;
+			w12.Expand = false;
+			w12.Fill = false;
+			this.projectConfigurationTable.Add (this.projectNameLabelHBox);
+			global::Gtk.Table.TableChild w13 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.projectNameLabelHBox]));
+			w13.XOptions = ((global::Gtk.AttachOptions)(4));
+			w13.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.projectNameTextBox = new global::Gtk.Entry ();
+			this.projectNameTextBox.CanFocus = true;
+			this.projectNameTextBox.Name = "projectNameTextBox";
+			this.projectNameTextBox.IsEditable = true;
+			this.projectNameTextBox.InvisibleChar = '●';
+			this.projectConfigurationTable.Add (this.projectNameTextBox);
+			global::Gtk.Table.TableChild w14 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.projectNameTextBox]));
+			w14.LeftAttach = ((uint)(1));
+			w14.RightAttach = ((uint)(2));
+			w14.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.solutionLocationSpacerLabel1 = new global::Gtk.Label ();
+			this.solutionLocationSpacerLabel1.Name = "solutionLocationSpacerLabel1";
+			this.projectConfigurationTable.Add (this.solutionLocationSpacerLabel1);
+			global::Gtk.Table.TableChild w15 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.solutionLocationSpacerLabel1]));
+			w15.TopAttach = ((uint)(2));
+			w15.BottomAttach = ((uint)(3));
+			w15.XOptions = ((global::Gtk.AttachOptions)(4));
+			w15.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.solutionLocationSpacerLabel2 = new global::Gtk.Label ();
+			this.solutionLocationSpacerLabel2.Name = "solutionLocationSpacerLabel2";
+			this.projectConfigurationTable.Add (this.solutionLocationSpacerLabel2);
+			global::Gtk.Table.TableChild w16 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.solutionLocationSpacerLabel2]));
+			w16.TopAttach = ((uint)(3));
+			w16.BottomAttach = ((uint)(4));
+			w16.XOptions = ((global::Gtk.AttachOptions)(4));
+			w16.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.solutionNameLabelHBox = new global::Gtk.HBox ();
+			this.solutionNameLabelHBox.Name = "solutionNameLabelHBox";
+			this.solutionNameLabelHBox.Spacing = 6;
+			// Container child solutionNameLabelHBox.Gtk.Box+BoxChild
+			this.solutionNamePaddingLabel = new global::Gtk.Label ();
+			this.solutionNamePaddingLabel.Name = "solutionNamePaddingLabel";
+			this.solutionNameLabelHBox.Add (this.solutionNamePaddingLabel);
+			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.solutionNameLabelHBox [this.solutionNamePaddingLabel]));
+			w17.Position = 0;
+			// Container child solutionNameLabelHBox.Gtk.Box+BoxChild
+			this.solutionNameLabel = new global::Gtk.Label ();
+			this.solutionNameLabel.Name = "solutionNameLabel";
+			this.solutionNameLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Solution Name");
+			this.solutionNameLabel.Justify = ((global::Gtk.Justification)(1));
+			this.solutionNameLabelHBox.Add (this.solutionNameLabel);
+			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.solutionNameLabelHBox [this.solutionNameLabel]));
+			w18.Position = 1;
+			w18.Expand = false;
+			w18.Fill = false;
+			this.projectConfigurationTable.Add (this.solutionNameLabelHBox);
+			global::Gtk.Table.TableChild w19 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.solutionNameLabelHBox]));
+			w19.TopAttach = ((uint)(1));
+			w19.BottomAttach = ((uint)(2));
+			w19.XOptions = ((global::Gtk.AttachOptions)(4));
+			w19.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.solutionNameTextBox = new global::Gtk.Entry ();
+			this.solutionNameTextBox.CanFocus = true;
+			this.solutionNameTextBox.Name = "solutionNameTextBox";
+			this.solutionNameTextBox.IsEditable = true;
+			this.solutionNameTextBox.InvisibleChar = '●';
+			this.projectConfigurationTable.Add (this.solutionNameTextBox);
+			global::Gtk.Table.TableChild w20 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.solutionNameTextBox]));
+			w20.TopAttach = ((uint)(1));
+			w20.BottomAttach = ((uint)(2));
+			w20.LeftAttach = ((uint)(1));
+			w20.RightAttach = ((uint)(2));
+			w20.XOptions = ((global::Gtk.AttachOptions)(4));
+			w20.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.useGitCheckBox = new global::Gtk.CheckButton ();
+			this.useGitCheckBox.CanFocus = true;
+			this.useGitCheckBox.Name = "useGitCheckBox";
+			this.useGitCheckBox.Label = global::Mono.Unix.Catalog.GetString ("Use git for version control.");
+			this.useGitCheckBox.Active = true;
+			this.useGitCheckBox.DrawIndicator = true;
+			this.useGitCheckBox.UseUnderline = true;
+			this.projectConfigurationTable.Add (this.useGitCheckBox);
+			global::Gtk.Table.TableChild w21 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.useGitCheckBox]));
+			w21.TopAttach = ((uint)(8));
+			w21.BottomAttach = ((uint)(9));
+			w21.LeftAttach = ((uint)(1));
+			w21.RightAttach = ((uint)(3));
+			w21.XOptions = ((global::Gtk.AttachOptions)(4));
+			w21.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child projectConfigurationTable.Gtk.Table+TableChild
+			this.versionControlLabelHBox = new global::Gtk.HBox ();
+			this.versionControlLabelHBox.Name = "versionControlLabelHBox";
+			this.versionControlLabelHBox.Spacing = 6;
+			// Container child versionControlLabelHBox.Gtk.Box+BoxChild
+			this.versionControlPaddingLabel = new global::Gtk.Label ();
+			this.versionControlPaddingLabel.Name = "versionControlPaddingLabel";
+			this.versionControlLabelHBox.Add (this.versionControlPaddingLabel);
+			global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.versionControlLabelHBox [this.versionControlPaddingLabel]));
+			w22.Position = 0;
+			// Container child versionControlLabelHBox.Gtk.Box+BoxChild
+			this.versionControlLabel = new global::Gtk.Label ();
+			this.versionControlLabel.Name = "versionControlLabel";
+			this.versionControlLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Version Control");
+			this.versionControlLabel.Justify = ((global::Gtk.Justification)(1));
+			this.versionControlLabelHBox.Add (this.versionControlLabel);
+			global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.versionControlLabelHBox [this.versionControlLabel]));
+			w23.Position = 1;
+			w23.Expand = false;
+			w23.Fill = false;
+			this.projectConfigurationTable.Add (this.versionControlLabelHBox);
+			global::Gtk.Table.TableChild w24 = ((global::Gtk.Table.TableChild)(this.projectConfigurationTable [this.versionControlLabelHBox]));
+			w24.TopAttach = ((uint)(8));
+			w24.BottomAttach = ((uint)(9));
+			w24.XOptions = ((global::Gtk.AttachOptions)(4));
+			w24.YOptions = ((global::Gtk.AttachOptions)(4));
+			this.vbox2.Add (this.projectConfigurationTable);
+			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.projectConfigurationTable]));
+			w25.Position = 0;
+			w25.Expand = false;
+			w25.Fill = false;
 			w1.Add (this.vbox2);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
-			w4.Position = 0;
+			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
+			w26.Position = 0;
+			w26.Expand = false;
+			w26.Fill = false;
 			// Internal child NewProjectDialogTest.TestDialog.ActionArea
-			global::Gtk.HButtonBox w5 = this.ActionArea;
-			w5.Name = "dialog1_ActionArea";
-			w5.Spacing = 10;
-			w5.BorderWidth = ((uint)(5));
-			w5.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w27 = this.ActionArea;
+			w27.Name = "dialog1_ActionArea";
+			w27.Spacing = 10;
+			w27.BorderWidth = ((uint)(5));
+			w27.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -59,9 +342,9 @@ namespace NewProjectDialogTest
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w6 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5 [this.buttonCancel]));
-			w6.Expand = false;
-			w6.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w28 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w27 [this.buttonCancel]));
+			w28.Expand = false;
+			w28.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -71,15 +354,15 @@ namespace NewProjectDialogTest
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
 			this.AddActionWidget (this.buttonOk, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w7 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5 [this.buttonOk]));
-			w7.Position = 1;
-			w7.Expand = false;
-			w7.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w29 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w27 [this.buttonOk]));
+			w29.Position = 1;
+			w29.Expand = false;
+			w29.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
-			this.DefaultWidth = 400;
-			this.DefaultHeight = 300;
+			this.DefaultWidth = 588;
+			this.DefaultHeight = 383;
 			this.Show ();
 		}
 	}
