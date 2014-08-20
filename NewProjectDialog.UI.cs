@@ -91,28 +91,22 @@ namespace NewProjectDialogTest
 			centreVBox.PackEnd (templatesHBox, true, true, 0);
 
 			// Template categories.
-			var categoriesEventBox = new EventBox ();
-			categoriesEventBox.ModifyBg (StateType.Normal, categoriesBackgroundColor);
-			categoriesEventBox.WidthRequest = 220;
-			templatesHBox.PackStart (categoriesEventBox, false, false, 0);
-
-			// Template categories tree view.
 			var templateCategoriesVBox = new VBox ();
 			templateCategoriesVBox.BorderWidth = 0;
 			templateCategoriesVBox.WidthRequest = 220;
+			var templateCategoriesScrolledWindow = new ScrolledWindow ();
+			templateCategoriesScrolledWindow.HscrollbarPolicy = PolicyType.Never;
+
+			// Template categories tree view.
 			templateCategoriesTreeView = new TreeView ();
 			templateCategoriesTreeView.BorderWidth = 0;
 			templateCategoriesTreeView.HeadersVisible = false;
 			templateCategoriesTreeView.Model = templateCategoriesListStore;
+			templateCategoriesTreeView.ModifyBase (StateType.Normal, categoriesBackgroundColor);
 			templateCategoriesTreeView.AppendColumn (CreateTemplateCategoriesTreeViewColumn ());
-			templateCategoriesVBox.PackStart (templateCategoriesTreeView, false, false, 0);
-
-			// Bottom of template categories tree view.
-			var templateCategoriesBottomFillerEventBox = new EventBox ();
-			templateCategoriesBottomFillerEventBox.BorderWidth = 0;
-			templateCategoriesBottomFillerEventBox.ModifyBg (StateType.Normal, categoriesBackgroundColor);
-			templateCategoriesVBox.PackStart (templateCategoriesBottomFillerEventBox, true, true, 0);
-			categoriesEventBox.Add (templateCategoriesVBox);
+			templateCategoriesScrolledWindow.Add (templateCategoriesTreeView);
+			templateCategoriesVBox.PackStart (templateCategoriesScrolledWindow, true, true, 0);
+			templatesHBox.PackStart (templateCategoriesVBox, false, false, 0);
 
 			// Templates.
 			var templateListEventBox = new EventBox ();
