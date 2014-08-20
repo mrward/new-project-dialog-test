@@ -42,6 +42,7 @@ namespace NewProjectDialogTest
 		Color selectedRowBackgroundColor = new Color (19, 112, 216);
 
 		Button cancelButton;
+		Button previousButton;
 		TreeView templateCategoriesTreeView;
 		const int TemplateCategoryColumn = 2;
 		ListStore templateCategoriesListStore =
@@ -185,8 +186,9 @@ namespace NewProjectDialogTest
 			bottomHBox.PackStart (previousNextButtonBox);
 			previousNextButtonBox.Layout = ButtonBoxStyle.End;
 
-			var previousButton = new Button ();
+			previousButton = new Button ();
 			previousButton.Label = Catalog.GetString ("Previous");
+			previousButton.Sensitive = false;
 			previousNextButtonBox.PackEnd (previousButton);
 
 			// Next button - bottom right.
