@@ -153,6 +153,7 @@ namespace NewProjectDialogTest
 			// Container child locationLabelHBox.Gtk.Box+BoxChild
 			this.locationLabel = new global::Gtk.Label ();
 			this.locationLabel.Name = "locationLabel";
+			this.locationLabel.Xpad = 5;
 			this.locationLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Location");
 			this.locationLabel.Justify = ((global::Gtk.Justification)(1));
 			this.locationLabelHBox.Add (this.locationLabel);
@@ -193,6 +194,7 @@ namespace NewProjectDialogTest
 			// Container child projectNameLabelHBox.Gtk.Box+BoxChild
 			this.projectNameLabel = new global::Gtk.Label ();
 			this.projectNameLabel.Name = "projectNameLabel";
+			this.projectNameLabel.Xpad = 5;
 			this.projectNameLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Project Name");
 			this.projectNameLabel.Justify = ((global::Gtk.Justification)(1));
 			this.projectNameLabelHBox.Add (this.projectNameLabel);
@@ -246,6 +248,7 @@ namespace NewProjectDialogTest
 			// Container child solutionNameLabelHBox.Gtk.Box+BoxChild
 			this.solutionNameLabel = new global::Gtk.Label ();
 			this.solutionNameLabel.Name = "solutionNameLabel";
+			this.solutionNameLabel.Xpad = 5;
 			this.solutionNameLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Solution Name");
 			this.solutionNameLabel.Justify = ((global::Gtk.Justification)(1));
 			this.solutionNameLabelHBox.Add (this.solutionNameLabel);
@@ -302,6 +305,7 @@ namespace NewProjectDialogTest
 			// Container child versionControlLabelHBox.Gtk.Box+BoxChild
 			this.versionControlLabel = new global::Gtk.Label ();
 			this.versionControlLabel.Name = "versionControlLabel";
+			this.versionControlLabel.Xpad = 5;
 			this.versionControlLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Version Control");
 			this.versionControlLabel.Justify = ((global::Gtk.Justification)(1));
 			this.versionControlLabelHBox.Add (this.versionControlLabel);

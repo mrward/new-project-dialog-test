@@ -717,6 +717,7 @@
                     <child>
                       <widget class="Gtk.Label" id="locationLabel">
                         <property name="MemberName" />
+                        <property name="Xpad">5</property>
                         <property name="LabelProp" translatable="yes">Location</property>
                         <property name="Justify">Right</property>
                       </widget>
@@ -781,6 +782,7 @@
                     <child>
                       <widget class="Gtk.Label" id="projectNameLabel">
                         <property name="MemberName" />
+                        <property name="Xpad">5</property>
                         <property name="LabelProp" translatable="yes">Project Name</property>
                         <property name="Justify">Right</property>
                       </widget>
@@ -876,6 +878,7 @@
                     <child>
                       <widget class="Gtk.Label" id="solutionNameLabel">
                         <property name="MemberName" />
+                        <property name="Xpad">5</property>
                         <property name="LabelProp" translatable="yes">Solution Name</property>
                         <property name="Justify">Right</property>
                       </widget>
@@ -966,6 +969,7 @@
                     <child>
                       <widget class="Gtk.Label" id="versionControlLabel">
                         <property name="MemberName" />
+                        <property name="Xpad">5</property>
                         <property name="LabelProp" translatable="yes">Version Control</property>
                         <property name="Justify">Right</property>
                       </widget>
