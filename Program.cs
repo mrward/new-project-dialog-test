@@ -37,6 +37,7 @@ namespace NewProjectDialogTest
 			//MainWindow win = new MainWindow ();
 			//win.Show ();
 			ShowNewProjectDialog ();
+			//ShowTestDialog ();
 			//Application.Run ();
 		}
 
@@ -45,6 +46,12 @@ namespace NewProjectDialogTest
 			var controller = new NewProjectController ();
 			var dialog = new NewProjectDialog ();
 			dialog.RegisterController (controller);
+			dialog.Run ();
+		}
+
+		static void ShowTestDialog ()
+		{
+			var dialog = new TestDialog ();
 			dialog.Run ();
 		}
 	}

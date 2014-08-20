@@ -6,7 +6,9 @@ namespace NewProjectDialogTest
 	{
 		private global::Gtk.VBox vbox2;
 		
-		private global::Gtk.Image image1;
+		private global::Gtk.ScrolledWindow scrolledwindow1;
+		
+		private global::Gtk.TreeView treeview1;
 		
 		private global::Gtk.Button buttonCancel;
 		
@@ -27,20 +29,27 @@ namespace NewProjectDialogTest
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.image1 = new global::Gtk.Image ();
-			this.image1.Name = "image1";
-			this.vbox2.Add (this.image1);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.image1]));
-			w2.Position = 0;
-			w1.Add (this.vbox2);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
+			this.scrolledwindow1 = new global::Gtk.ScrolledWindow ();
+			this.scrolledwindow1.CanFocus = true;
+			this.scrolledwindow1.Name = "scrolledwindow1";
+			this.scrolledwindow1.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child scrolledwindow1.Gtk.Container+ContainerChild
+			this.treeview1 = new global::Gtk.TreeView ();
+			this.treeview1.CanFocus = true;
+			this.treeview1.Name = "treeview1";
+			this.scrolledwindow1.Add (this.treeview1);
+			this.vbox2.Add (this.scrolledwindow1);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.scrolledwindow1]));
 			w3.Position = 0;
+			w1.Add (this.vbox2);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
+			w4.Position = 0;
 			// Internal child NewProjectDialogTest.TestDialog.ActionArea
-			global::Gtk.HButtonBox w4 = this.ActionArea;
-			w4.Name = "dialog1_ActionArea";
-			w4.Spacing = 10;
-			w4.BorderWidth = ((uint)(5));
-			w4.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w5 = this.ActionArea;
+			w5.Name = "dialog1_ActionArea";
+			w5.Spacing = 10;
+			w5.BorderWidth = ((uint)(5));
+			w5.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -50,9 +59,9 @@ namespace NewProjectDialogTest
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w5 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w4 [this.buttonCancel]));
-			w5.Expand = false;
-			w5.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w6 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5 [this.buttonCancel]));
+			w6.Expand = false;
+			w6.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -62,10 +71,10 @@ namespace NewProjectDialogTest
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
 			this.AddActionWidget (this.buttonOk, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w6 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w4 [this.buttonOk]));
-			w6.Position = 1;
-			w6.Expand = false;
-			w6.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w7 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5 [this.buttonOk]));
+			w7.Position = 1;
+			w7.Expand = false;
+			w7.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
