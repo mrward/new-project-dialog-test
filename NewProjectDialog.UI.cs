@@ -41,8 +41,16 @@ namespace NewProjectDialogTest
 		Color templateSectionSeparatorColor = new Gdk.Color (208, 208, 208);
 		Color selectedRowBackgroundColor = new Color (19, 112, 216);
 
+		string chooseTemplateBannerText =  Catalog.GetString ("Choose a template for your new project");
+		string configureYourProjectBannerText = Catalog.GetString ("Configure your new project");
+
+		VBox centreVBox;
+		HBox templatesHBox;
 		Button cancelButton;
 		Button previousButton;
+		Button nextButton;
+		Label topBannerLabel;
+
 		TreeView templateCategoriesTreeView;
 		const int TemplateCategoryColumn = 2;
 		ListStore templateCategoriesListStore =
@@ -55,6 +63,7 @@ namespace NewProjectDialogTest
 		Gtk.Image templateImage;
 		Label templateNameLabel;
 		Label templateDescriptionLabel;
+		ProjectConfigurationWidget projectConfigurationWidget;
 
 		void Build ()
 		{
@@ -67,6 +76,8 @@ namespace NewProjectDialogTest
 			Title = Catalog.GetString ("New Project");
 			WindowPosition = WindowPosition.CenterOnParent;
 
+			projectConfigurationWidget = new ProjectConfigurationWidget ();
+
 			// Top banner of dialog.
 			var topLabelEventBox = new EventBox ();
 			topLabelEventBox.HeightRequest = 53;
@@ -74,22 +85,22 @@ namespace NewProjectDialogTest
 			topLabelEventBox.ModifyFg (StateType.Normal, whiteColor);
 			topLabelEventBox.BorderWidth = 0;
 
-			var chooseTemplateLabel = new Label ();
-			chooseTemplateLabel.Text = Catalog.GetString ("Choose a template for your new project");
-			Pango.FontDescription font = chooseTemplateLabel.Style.FontDescription.Copy ();
+			topBannerLabel = new Label ();
+			topBannerLabel.Text = chooseTemplateBannerText;
+			Pango.FontDescription font = topBannerLabel.Style.FontDescription.Copy ();
 			font.Size = (int)(font.Size * 1.8);
-			chooseTemplateLabel.ModifyFont (font);
-			chooseTemplateLabel.ModifyFg (StateType.Normal, whiteColor);
+			topBannerLabel.ModifyFont (font);
+			topBannerLabel.ModifyFg (StateType.Normal, whiteColor);
 			var topLabelHBox = new HBox ();
-			topLabelHBox.PackStart (chooseTemplateLabel, false, false, 20);
+			topLabelHBox.PackStart (topBannerLabel, false, false, 20);
 			topLabelEventBox.Add (topLabelHBox);
 
 			VBox.PackStart (topLabelEventBox, false, false, 0);
 
 			// Main templates section.
-			var centreVBox = new VBox ();
+			centreVBox = new VBox ();
 			VBox.PackStart (centreVBox, true, true, 0);
-			var templatesHBox = new HBox ();
+			templatesHBox = new HBox ();
 			centreVBox.PackEnd (templatesHBox, true, true, 0);
 
 			// Template categories.
@@ -192,7 +203,7 @@ namespace NewProjectDialogTest
 			previousNextButtonBox.PackEnd (previousButton);
 
 			// Next button - bottom right.
-			var nextButton = new Button ();
+			nextButton = new Button ();
 			nextButton.Label = Catalog.GetString ("Next");
 			previousNextButtonBox.PackEnd (nextButton);
 

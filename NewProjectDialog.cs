@@ -27,10 +27,11 @@
 
 using System;
 using Gtk;
+using Mono.Unix;
 
 namespace NewProjectDialogTest
 {
-	public partial class NewProjectDialog : Gtk.Dialog
+	public partial class NewProjectDialog : Dialog
 	{
 		INewProjectController controller;
 
@@ -41,6 +42,8 @@ namespace NewProjectDialogTest
 			templateCategoriesTreeView.Selection.Changed += TemplateCategoriesTreeViewSelectionChanged;
 			templatesTreeView.Selection.Changed += TemplatesTreeViewSelectionChanged;
 			cancelButton.Clicked += CancelButtonClicked;
+			nextButton.Clicked += (sender, e) => MoveToNextPage ();
+			previousButton.Clicked += (sender, e) => MoveToPreviousPage ();
 		}
 
 		void TemplateCategoriesTreeViewSelectionChanged (object sender, EventArgs e)
@@ -186,6 +189,29 @@ namespace NewProjectDialogTest
 			if (templatesListStore.IterNthChild (out iter, 1)) {
 				templatesTreeView.Selection.SelectIter (iter);
 			}
+		}
+
+		void MoveToNextPage ()
+		{
+			centreVBox.Remove (templatesHBox);
+			projectConfigurationWidget.Show ();
+			centreVBox.PackStart (projectConfigurationWidget, true, true, 0);
+
+			topBannerLabel.Text = configureYourProjectBannerText;
+
+			previousButton.Sensitive = true;
+			nextButton.Label = Catalog.GetString ("Create");
+		}
+
+		void MoveToPreviousPage ()
+		{
+			centreVBox.Remove (projectConfigurationWidget);
+			centreVBox.PackStart (templatesHBox, true, true, 0);
+
+			topBannerLabel.Text = chooseTemplateBannerText;
+
+			previousButton.Sensitive = false;
+			nextButton.Label = Catalog.GetString ("Next");
 		}
 	}
 }
