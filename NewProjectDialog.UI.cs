@@ -39,6 +39,7 @@ namespace NewProjectDialogTest
 		Color templateListBackgroundColor = new Color (242, 242, 242);
 		Color templateBackgroundColor = new Color (255, 255, 255);
 		Color templateSectionSeparatorColor = new Gdk.Color (208, 208, 208);
+		Color selectedRowBackgroundColor = new Color (19, 112, 216);
 
 		Button cancelButton;
 		TreeView templateCategoriesTreeView;
@@ -103,6 +104,8 @@ namespace NewProjectDialogTest
 			templateCategoriesTreeView.HeadersVisible = false;
 			templateCategoriesTreeView.Model = templateCategoriesListStore;
 			templateCategoriesTreeView.ModifyBase (StateType.Normal, categoriesBackgroundColor);
+			templateCategoriesTreeView.ModifyBase (StateType.Selected, selectedRowBackgroundColor);
+			templateCategoriesTreeView.ModifyText (StateType.Selected, whiteColor);
 			templateCategoriesTreeView.AppendColumn (CreateTemplateCategoriesTreeViewColumn ());
 			templateCategoriesScrolledWindow.Add (templateCategoriesTreeView);
 			templateCategoriesVBox.PackStart (templateCategoriesScrolledWindow, true, true, 0);
@@ -120,6 +123,8 @@ namespace NewProjectDialogTest
 			templatesTreeView.HeadersVisible = false;
 			templatesTreeView.Model = templatesListStore;
 			templatesTreeView.ModifyBase (StateType.Normal, templateListBackgroundColor);
+			templatesTreeView.ModifyBase (StateType.Selected, selectedRowBackgroundColor);
+			templatesTreeView.ModifyText (StateType.Selected, whiteColor);
 			templatesTreeView.AppendColumn (CreateTemplateListTreeViewColumn ());
 			templatesScrolledWindow.Add (templatesTreeView);
 			templatesVBox.PackStart (templatesScrolledWindow, true, true, 0);
