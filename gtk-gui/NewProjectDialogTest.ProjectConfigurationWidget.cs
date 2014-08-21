@@ -56,7 +56,11 @@ namespace NewProjectDialogTest
 		
 		private global::Gtk.Label versionControlLabel;
 		
-		private global::Gtk.EventBox eventbox;
+		private global::Gtk.EventBox eventBox;
+		
+		private global::Gtk.VBox previewProjectFolderVBox;
+		
+		private global::NewProjectDialogTest.ProjectFolderPreviewWidget projectFolderPreviewWidget;
 
 		protected virtual void Build ()
 		{
@@ -324,12 +328,27 @@ namespace NewProjectDialogTest
 			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.mainHBox [this.projectConfigurationTableEventBox]));
 			w25.Position = 0;
 			// Container child mainHBox.Gtk.Box+BoxChild
-			this.eventbox = new global::Gtk.EventBox ();
-			this.eventbox.WidthRequest = 100;
-			this.eventbox.Name = "eventbox";
-			this.mainHBox.Add (this.eventbox);
-			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.mainHBox [this.eventbox]));
-			w26.Position = 1;
+			this.eventBox = new global::Gtk.EventBox ();
+			this.eventBox.Name = "eventBox";
+			// Container child eventBox.Gtk.Container+ContainerChild
+			this.previewProjectFolderVBox = new global::Gtk.VBox ();
+			this.previewProjectFolderVBox.Name = "previewProjectFolderVBox";
+			this.previewProjectFolderVBox.Spacing = 6;
+			this.previewProjectFolderVBox.BorderWidth = ((uint)(20));
+			// Container child previewProjectFolderVBox.Gtk.Box+BoxChild
+			this.projectFolderPreviewWidget = new global::NewProjectDialogTest.ProjectFolderPreviewWidget ();
+			this.projectFolderPreviewWidget.WidthRequest = 250;
+			this.projectFolderPreviewWidget.Events = ((global::Gdk.EventMask)(256));
+			this.projectFolderPreviewWidget.Name = "projectFolderPreviewWidget";
+			this.previewProjectFolderVBox.Add (this.projectFolderPreviewWidget);
+			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.previewProjectFolderVBox [this.projectFolderPreviewWidget]));
+			w26.Position = 0;
+			this.eventBox.Add (this.previewProjectFolderVBox);
+			this.mainHBox.Add (this.eventBox);
+			global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(this.mainHBox [this.eventBox]));
+			w28.Position = 1;
+			w28.Expand = false;
+			w28.Fill = false;
 			this.Add (this.mainHBox);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

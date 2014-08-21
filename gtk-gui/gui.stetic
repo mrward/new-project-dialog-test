@@ -1004,16 +1004,32 @@
           </packing>
         </child>
         <child>
-          <widget class="Gtk.EventBox" id="eventbox">
+          <widget class="Gtk.EventBox" id="eventBox">
             <property name="MemberName" />
-            <property name="WidthRequest">100</property>
             <child>
-              <placeholder />
+              <widget class="Gtk.VBox" id="previewProjectFolderVBox">
+                <property name="MemberName" />
+                <property name="Spacing">6</property>
+                <property name="BorderWidth">20</property>
+                <child>
+                  <widget class="NewProjectDialogTest.ProjectFolderPreviewWidget" id="projectFolderPreviewWidget">
+                    <property name="MemberName" />
+                    <property name="WidthRequest">250</property>
+                    <property name="Events">ButtonPressMask</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                  </packing>
+                </child>
+              </widget>
             </child>
           </widget>
           <packing>
             <property name="Position">1</property>
             <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
           </packing>
         </child>
       </widget>
@@ -1412,6 +1428,70 @@ Platforms</property>
               </packing>
             </child>
           </widget>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Bin" id="NewProjectDialogTest.ProjectFolderPreviewWidget" design-size="300 416">
+    <property name="MemberName" />
+    <property name="Visible">False</property>
+    <child>
+      <widget class="Gtk.VBox" id="mainVBox">
+        <property name="MemberName" />
+        <property name="Spacing">6</property>
+        <child>
+          <widget class="Gtk.HBox" id="previewLabelHBox">
+            <property name="MemberName" />
+            <property name="Spacing">6</property>
+            <child>
+              <widget class="Gtk.Label" id="previewLabel">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">&lt;span weight='bold' foreground='#555555'&gt;PREVIEW&lt;/span&gt;</property>
+                <property name="UseMarkup">True</property>
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="previewPaddingLabel">
+                <property name="MemberName" />
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">False</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+            <property name="MemberName" />
+            <property name="HscrollbarPolicy">Never</property>
+            <child>
+              <widget class="Gtk.TreeView" id="folderTreeView">
+                <property name="MemberName" />
+                <property name="ShowScrollbars">True</property>
+                <property name="EnableSearch">False</property>
+                <property name="HeadersVisible">False</property>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+          </packing>
         </child>
       </widget>
     </child>

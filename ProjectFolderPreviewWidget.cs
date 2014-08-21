@@ -1,5 +1,5 @@
 ﻿//
-// ProjectConfigurationWidget.cs
+// ProjectFolderPreviewWidget.cs
 //
 // Author:
 //       Matt Ward <matt.ward@xamarin.com>
@@ -25,18 +25,50 @@
 // THE SOFTWARE.
 //
 
+using Gdk;
 using Gtk;
 
 namespace NewProjectDialogTest
 {
 	[System.ComponentModel.ToolboxItem (true)]
-	public partial class ProjectConfigurationWidget : Gtk.Bin
+	public partial class ProjectFolderPreviewWidget : Gtk.Bin
 	{
-		public ProjectConfigurationWidget ()
+		TreeStore folderTreeStore;
+
+		public ProjectFolderPreviewWidget ()
 		{
 			this.Build ();
-			eventBox.ModifyBg (StateType.Normal, new Gdk.Color (229, 233, 239));
-			projectConfigurationTableEventBox.ModifyBg (StateType.Normal, new Gdk.Color (255, 255, 255));
+			folderTreeView.ModifyBase (Gtk.StateType.Normal, new Gdk.Color (229, 233, 239));
+
+			LoadFolderTreeView ();
+		}
+
+		void LoadFolderTreeView ()
+		{
+			folderTreeStore = new TreeStore (typeof(Pixbuf), typeof(string));
+			folderTreeView.Model = folderTreeStore;
+			folderTreeView.ShowExpanders = false;
+			folderTreeView.LevelIndentation = 10;
+			folderTreeView.CanFocus = false;
+
+			var column = new TreeViewColumn ();
+			var iconRenderer = new CellRendererPixbuf ();
+			column.PackStart (iconRenderer, false);
+			column.AddAttribute (iconRenderer, "pixbuf", column: 0);
+
+			var textRenderer = new CellRendererText ();
+			column.PackStart (textRenderer, true);
+			column.AddAttribute (textRenderer, "markup", column: 1);
+
+			folderTreeView.AppendColumn (column);
+
+			TreeIter iter = folderTreeStore.AppendValues (null, "~/Projects");
+			iter = folderTreeStore.AppendValues (iter, null, "Solution");
+			folderTreeStore.AppendValues (iter, null, "Solution.sln");
+			iter = folderTreeStore.AppendValues (iter, null, "Project");
+			folderTreeStore.AppendValues (iter, null, "Project.csproj");
+
+			folderTreeView.ExpandAll ();
 		}
 	}
 }

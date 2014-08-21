@@ -104,6 +104,8 @@
     <Compile Include="TemplateWizard.cs" />
     <Compile Include="WizardPage.cs" />
     <Compile Include="XamarinFormsTemplateWizard.cs" />
+    <Compile Include="ProjectFolderPreviewWidget.cs" />
+    <Compile Include="gtk-gui\NewProjectDialogTest.ProjectFolderPreviewWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
