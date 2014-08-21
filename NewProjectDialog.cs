@@ -150,6 +150,8 @@ namespace NewProjectDialogTest
 			if (template != null) {
 				ShowTemplate (template);
 			}
+
+			nextButton.Sensitive = (template != null);
 		}
 
 		void ClearSelectedTemplateInformation ()
