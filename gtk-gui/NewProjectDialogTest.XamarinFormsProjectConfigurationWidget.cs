@@ -74,7 +74,7 @@ namespace NewProjectDialogTest
 			this.configurationTable.Name = "configurationTable";
 			this.configurationTable.RowSpacing = ((uint)(6));
 			this.configurationTable.ColumnSpacing = ((uint)(6));
-			this.configurationTable.BorderWidth = ((uint)(20));
+			this.configurationTable.BorderWidth = ((uint)(40));
 			// Container child configurationTable.Gtk.Table+TableChild
 			this.appNameHBox = new global::Gtk.HBox ();
 			this.appNameHBox.Name = "appNameHBox";

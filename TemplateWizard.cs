@@ -1,5 +1,5 @@
-//
-// INewProjectController.cs
+﻿//
+// TemplateWizard.cs
 //
 // Author:
 //       Matt Ward <matt.ward@xamarin.com>
@@ -25,15 +25,18 @@
 // THE SOFTWARE.
 //
 
-using System.Collections.Generic;
-
 namespace NewProjectDialogTest
 {
-	public interface INewProjectController
+	public abstract class TemplateWizard
 	{
-		IEnumerable<TemplateCategory> TemplateCategories { get; }
+		//public abstract void RegisterHost (TemplateWizardHost host);
 
-		TemplateWizard CreateTemplateWizard (string id);
+		public abstract WizardPage GetPage (int pageNumber);
+
+		// Allow wizard to run any steps just before the projects are generated from the templates.
+		// This is called when the user clicks the Create button on the last page.
+		// This can be used to remove projects that are not required.
+		//public virtual void BeforeGeneration () { }
 	}
 }
 

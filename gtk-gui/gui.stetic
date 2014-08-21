@@ -1019,7 +1019,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="NewProjectDialogTest.XamarinFormsProjectConfigurationWidget" design-size="860 484">
+  <widget class="Gtk.Bin" id="NewProjectDialogTest.XamarinFormsProjectConfigurationWidget" design-size="900 484">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -1036,7 +1036,7 @@
                 <property name="NColumns">2</property>
                 <property name="RowSpacing">6</property>
                 <property name="ColumnSpacing">6</property>
-                <property name="BorderWidth">20</property>
+                <property name="BorderWidth">40</property>
                 <child>
                   <placeholder />
                 </child>

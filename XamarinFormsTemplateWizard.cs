@@ -1,5 +1,5 @@
-//
-// INewProjectController.cs
+﻿//
+// XamarinFormsTemplateWizard.cs
 //
 // Author:
 //       Matt Ward <matt.ward@xamarin.com>
@@ -25,15 +25,19 @@
 // THE SOFTWARE.
 //
 
-using System.Collections.Generic;
-
 namespace NewProjectDialogTest
 {
-	public interface INewProjectController
+	public class XamarinFormsTemplateWizard : TemplateWizard
 	{
-		IEnumerable<TemplateCategory> TemplateCategories { get; }
+		XamarinFormsProjectConfigurationWidget widget = new XamarinFormsProjectConfigurationWidget ();
 
-		TemplateWizard CreateTemplateWizard (string id);
+		public override WizardPage GetPage (int pageNumber)
+		{
+			if (pageNumber == 1) {
+				return widget;
+			}
+			return null;
+		}
 	}
 }
 

@@ -27,16 +27,18 @@
 
 using Gdk;
 using Gtk;
+using Mono.Unix;
 
 namespace NewProjectDialogTest
 {
 	[System.ComponentModel.ToolboxItem (true)]
-	public partial class XamarinFormsProjectConfigurationWidget : Gtk.Bin
+	public partial class XamarinFormsProjectConfigurationWidget : WizardPage
 	{
 		public XamarinFormsProjectConfigurationWidget ()
 		{
 			this.Build ();
 			mainEventBox.ModifyBg (StateType.Normal, new Color (255, 255, 255));
+			Title = Catalog.GetString ("Configure your Xamarin.Forms app");
 		}
 	}
 }

@@ -1,5 +1,5 @@
-//
-// INewProjectController.cs
+﻿//
+// WizardPage.cs
 //
 // Author:
 //       Matt Ward <matt.ward@xamarin.com>
@@ -25,15 +25,34 @@
 // THE SOFTWARE.
 //
 
-using System.Collections.Generic;
-
 namespace NewProjectDialogTest
 {
-	public interface INewProjectController
+	public abstract class WizardPage : Gtk.Bin
 	{
-		IEnumerable<TemplateCategory> TemplateCategories { get; }
+		// Enables/disables the Next button. 
+		//public bool CanMoveToNextPage { get; }
 
-		TemplateWizard CreateTemplateWizard (string id);
+		//public event CanMoveToNextPageChanged;
+
+		public string Title { get; protected set; }
+
+		public bool HasNextPage { get; protected set; }
+
+		// Called when a page is made active. This allows the wizard to update its UI 
+		// if the user moved from another page which may have changed some values.
+		public virtual void Activated ()
+		{
+		}
+
+		// Called when another page is displayed just before the next page is displayed.
+		public virtual void Deactivated ()
+		{
+		}
+
+		// Disposed when the dialog is disposed.
+		public override void Dispose ()
+		{
+		}
 	}
 }
 

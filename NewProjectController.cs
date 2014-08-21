@@ -49,7 +49,8 @@ namespace NewProjectDialogTest
 			var generalCategory = new TemplateCategory ("general", "General", null);
 			var template = new SolutionTemplate ("blank-app-portable", "Blank App (Xamarin.Forms Portable)", "md-project-template") {
 				Description = "Blank App (Xamarin.Forms Portable). More text and some more. Blah, blah, blah, blah, more text that should wrap. More and more. More and even more",
-				LargeImageId = "md-template-background"
+				LargeImageId = "md-template-background",
+				Wizard = "Xamarin.Forms.Template.Wizard"
 			};
 			generalCategory.AddTemplate (template);
 			template = new SolutionTemplate ("blank-app-shared", "Blank App (Xamarin.Forms Shared)", "md-project-template") {
@@ -93,6 +94,14 @@ namespace NewProjectDialogTest
 			otherCategory.AddCategory (aspNetCategory);
 			otherCategory.AddCategory (miscCategory);
 			templateCategories.Add (otherCategory);
+		}
+
+		public TemplateWizard CreateTemplateWizard (string id)
+		{
+			if (id == "Xamarin.Forms.Template.Wizard") {
+				return new XamarinFormsTemplateWizard ();
+			}
+			return null;
 		}
 	}
 }

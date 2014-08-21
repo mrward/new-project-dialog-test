@@ -43,6 +43,12 @@ namespace NewProjectDialogTest
 		public string IconId { get; private set; }
 		public string Description { get; set; }
 		public string LargeImageId { get; set; }
+
+		public string Wizard { get; set; }
+
+		public bool HasWizard {
+			get { return !String.IsNullOrEmpty (Wizard); }
+		}
 	}
 }
 

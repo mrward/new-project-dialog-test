@@ -34,6 +34,8 @@ namespace NewProjectDialogTest
 	public partial class NewProjectDialog : Dialog
 	{
 		INewProjectController controller;
+		int currentPage;
+		TemplateWizard wizard;
 
 		public NewProjectDialog ()
 		{
@@ -195,25 +197,82 @@ namespace NewProjectDialogTest
 
 		void MoveToNextPage ()
 		{
-			centreVBox.Remove (templatesHBox);
-			projectConfigurationWidget.Show ();
-			centreVBox.PackStart (projectConfigurationWidget, true, true, 0);
+			SolutionTemplate template = GetSelectedTemplate ();
+			if (template == null)
+				return;
 
-			topBannerLabel.Text = configureYourProjectBannerText;
+			if (projectConfigurationWidget == centreVBox.Children [0]) {
+				Destroy ();
+				return;
+			}
+
+			Widget widget = GetNextPageWidget (template);
+
+			centreVBox.Remove (centreVBox.Children [0]);
+			widget.Show ();
+			centreVBox.PackStart (widget, true, true, 0);
+
+			if (widget is WizardPage) {
+				topBannerLabel.Text = ((WizardPage)widget).Title;
+			} else {
+				topBannerLabel.Text = configureYourProjectBannerText;
+			}
 
 			previousButton.Sensitive = true;
-			nextButton.Label = Catalog.GetString ("Create");
+			if (widget == projectConfigurationWidget) {
+				nextButton.Label = Catalog.GetString ("Create");
+			}
 		}
 
 		void MoveToPreviousPage ()
 		{
-			centreVBox.Remove (projectConfigurationWidget);
-			centreVBox.PackStart (templatesHBox, true, true, 0);
+			Widget widget = GetPreviousPageWidget (centreVBox.Children [0]);
+			widget.Show ();
 
-			topBannerLabel.Text = chooseTemplateBannerText;
+			centreVBox.Remove (centreVBox.Children [0]);
+			centreVBox.PackStart (widget, true, true, 0);
 
-			previousButton.Sensitive = false;
+			if (widget is WizardPage) {
+				topBannerLabel.Text = ((WizardPage)widget).Title;
+			} else {
+				topBannerLabel.Text = chooseTemplateBannerText;
+			}
+
+			previousButton.Sensitive = (wizard != null);
 			nextButton.Label = Catalog.GetString ("Next");
+		}
+
+		Widget GetNextPageWidget (SolutionTemplate template)
+		{
+			currentPage++;
+
+			if (template.HasWizard) {
+				wizard = controller.CreateTemplateWizard (template.Wizard);
+				if (wizard != null) {
+					WizardPage page = wizard.GetPage (currentPage);
+					if (page != null) {
+						return page;
+					}
+				}
+			}
+			return projectConfigurationWidget;
+		}
+
+		Widget GetPreviousPageWidget (Widget existingWidget)
+		{
+			currentPage--;
+
+			if (existingWidget == projectConfigurationWidget) {
+				if (wizard != null) {
+					WizardPage page = wizard.GetPage (currentPage);
+					if (page != null) {
+						return page;
+					}
+				}
+			}
+
+			wizard = null;
+			return templatesHBox;
 		}
 	}
 }
