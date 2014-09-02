@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 //
 
+using System;
 using Gtk;
 
 namespace NewProjectDialogTest
@@ -32,11 +33,66 @@ namespace NewProjectDialogTest
 	[System.ComponentModel.ToolboxItem (true)]
 	public partial class ProjectConfigurationWidget : Gtk.Bin
 	{
+		ProjectConfiguration projectConfiguration;
+
 		public ProjectConfigurationWidget ()
 		{
 			this.Build ();
 			eventBox.ModifyBg (StateType.Normal, new Gdk.Color (229, 233, 239));
 			projectConfigurationTableEventBox.ModifyBg (StateType.Normal, new Gdk.Color (255, 255, 255));
+
+			RegisterEvents ();
+		}
+
+		void RegisterEvents ()
+		{
+			locationTextBox.Changed += (sender, e) => OnLocationTextBoxChanged ();
+			projectNameTextBox.Changed += (sender, e) => OnProjectNameTextBoxChanged ();
+			solutionNameTextBox.Changed += (sender, e) => OnSolutionNameTextBoxChanged ();
+			createGitIgnoreFileCheckBox.Clicked += (sender, e) => OnCreateGitIgnoreFileCheckBoxClicked ();
+			createProjectWithinSolutionDirectoryCheckBox.Clicked += (sender, e) => OnCreateProjectWithinSolutionDirectoryCheckBoxClicked ();
+		}
+
+		void OnLocationTextBoxChanged ()
+		{
+			projectConfiguration.Location = locationTextBox.Text;
+			projectFolderPreviewWidget.UpdateLocation ();
+		}
+
+		void OnProjectNameTextBoxChanged ()
+		{
+			projectConfiguration.ProjectName = projectNameTextBox.Text;
+			projectFolderPreviewWidget.UpdateProjectName ();
+		}
+
+		void OnSolutionNameTextBoxChanged ()
+		{
+			projectConfiguration.SolutionName = solutionNameTextBox.Text;
+			projectFolderPreviewWidget.UpdateSolutionName ();
+		}
+
+		void OnCreateGitIgnoreFileCheckBoxClicked ()
+		{
+			projectConfiguration.CreateGitIgnoreFile = createGitIgnoreFileCheckBox.Active;
+			projectFolderPreviewWidget.ShowGitIgnoreFile ();
+		}
+
+		void OnCreateProjectWithinSolutionDirectoryCheckBoxClicked ()
+		{
+			projectConfiguration.CreateProjectDirectoryInsideSolutionDirectory = createProjectWithinSolutionDirectoryCheckBox.Active;
+			projectFolderPreviewWidget.ShowSolutionFolderNode (projectConfiguration.CreateProjectDirectoryInsideSolutionDirectory);
+		}
+
+		public void Load (ProjectConfiguration projectConfiguration)
+		{
+			this.projectConfiguration = projectConfiguration;
+			LoadWidget ();
+		}
+
+		void LoadWidget ()
+		{
+			projectFolderPreviewWidget.Load (projectConfiguration);
+			locationTextBox.Text = projectConfiguration.Location;
 		}
 	}
 }

@@ -255,6 +255,11 @@ namespace NewProjectDialogTest
 					}
 				}
 			}
+			var config = new ProjectConfiguration () {
+				Location = "~/Projects",
+				ProjectFileExtension = ".csproj"
+			};
+			projectConfigurationWidget.Load (config);
 			return projectConfigurationWidget;
 		}
 
