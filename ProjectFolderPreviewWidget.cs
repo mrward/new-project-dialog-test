@@ -62,11 +62,14 @@ namespace NewProjectDialogTest
 
 			folderTreeView.AppendColumn (column);
 
-			TreeIter iter = folderTreeStore.AppendValues (null, "~/Projects");
-			iter = folderTreeStore.AppendValues (iter, null, "Solution");
-			folderTreeStore.AppendValues (iter, null, "Solution.sln");
-			iter = folderTreeStore.AppendValues (iter, null, "Project");
-			folderTreeStore.AppendValues (iter, null, "Project.csproj");
+			var folderImage = new Gdk.Pixbuf (typeof(ProjectFolderPreviewWidget).Assembly, "md-generic-folder");
+			var fileImage = new Gdk.Pixbuf (typeof(ProjectFolderPreviewWidget).Assembly, "md-generic-file");
+
+			TreeIter iter = folderTreeStore.AppendValues (folderImage, "~/Projects");
+			iter = folderTreeStore.AppendValues (iter, folderImage, "Solution");
+			folderTreeStore.AppendValues (iter, fileImage, "Solution.sln");
+			iter = folderTreeStore.AppendValues (iter, folderImage, "Project");
+			folderTreeStore.AppendValues (iter, fileImage, "Project.csproj");
 
 			folderTreeView.ExpandAll ();
 		}
