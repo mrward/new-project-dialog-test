@@ -28,6 +28,8 @@
 using System;
 using Gtk;
 using Mono.Unix;
+using Mono.TextEditor;
+using MonoDevelop.Components;
 
 namespace NewProjectDialogTest
 {
@@ -43,9 +45,50 @@ namespace NewProjectDialogTest
 
 			templateCategoriesTreeView.Selection.Changed += TemplateCategoriesTreeViewSelectionChanged;
 			templatesTreeView.Selection.Changed += TemplatesTreeViewSelectionChanged;
+			templatesTreeView.ButtonPressEvent += TemplatesTreeViewButtonPressed;
 			cancelButton.Clicked += CancelButtonClicked;
 			nextButton.Clicked += (sender, e) => MoveToNextPage ();
 			previousButton.Clicked += (sender, e) => MoveToPreviousPage ();
+		}
+
+		[GLib.ConnectBefore]
+		void TemplatesTreeViewButtonPressed (object o, ButtonPressEventArgs args)
+		{
+			if (templateTextRenderer.IsLanguageButtonPressed (args.Event)) {
+
+				var menu = new Menu ();
+				menu.AttachToWidget (this, null);
+				MenuItem menuItem = CreateLanguageMenuItem ("C#");
+				menu.Append (menuItem);
+				menuItem = CreateLanguageMenuItem ("F#");
+				menu.Append (menuItem);
+				menu.ModifyBg (StateType.Normal, TemplateCellRendererText.LanguageButtonBackgroundColor);
+				menu.ShowAll ();
+
+				MenuPositionFunc posFunc = (Gtk.Menu m, out int x, out int y, out bool pushIn) => {
+					var rect = templateTextRenderer.GetLanguageRect ();
+					var rect2 = GtkUtil.ToScreenCoordinates (templatesTreeView, templatesTreeView.ParentWindow, rect);
+					x = rect2.X;
+					y = rect2.Bottom;
+					pushIn = false;
+				};
+				menu.Popup (null, null, posFunc, 0, args.Event.Time);
+			}
+		}
+
+		MenuItem CreateLanguageMenuItem (string language)
+		{
+			var menuItem = new MenuItem (language);
+			menuItem.Activated += LanguageMenuItemActivated;
+			return menuItem;
+		}
+
+		void LanguageMenuItemActivated (object sender, EventArgs e)
+		{
+			SolutionTemplate template = GetSelectedTemplate ();
+			if (template != null) {
+				
+			}
 		}
 
 		void TemplateCategoriesTreeViewSelectionChanged (object sender, EventArgs e)

@@ -1,0 +1,68 @@
+﻿//
+// GtkUtil.cs
+//
+// Author:
+//       Matt Ward <matt.ward@xamarin.com>
+//
+// Copyright (c) 2014 Xamarin Inc. (http://xamarin.com)
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+namespace MonoDevelop.Components
+{
+	public static class GtkUtil
+	{
+		public static Gdk.Rectangle ToScreenCoordinates (Gtk.Widget widget, Gdk.Window w, Gdk.Rectangle rect)
+		{
+			return new Gdk.Rectangle (ToScreenCoordinates (widget, w, rect.X, rect.Y), rect.Size);
+		}
+
+		public static Gdk.Point ToScreenCoordinates (Gtk.Widget widget, Gdk.Window w, int x, int y)
+		{
+			int ox, oy;
+			w.GetOrigin (out ox, out oy);
+			ox += widget.Allocation.X;
+			oy += widget.Allocation.Y;
+			return new Gdk.Point (ox + x, oy + y);
+		}
+
+		public static Gdk.Rectangle ToWindowCoordinates (Gtk.Widget widget, Gdk.Window w, Gdk.Rectangle rect)
+		{
+			return new Gdk.Rectangle (ToWindowCoordinates (widget, w, rect.X, rect.Y), rect.Size);
+		}
+
+		public static Gdk.Point ToWindowCoordinates (Gtk.Widget widget, Gdk.Window w, int x, int y)
+		{
+			int ox, oy;
+			w.GetOrigin (out ox, out oy);
+			ox += widget.Allocation.X;
+			oy += widget.Allocation.Y;
+			return new Gdk.Point (x - ox, y - oy);
+		}
+
+		public static Cairo.Color ToCairoColor (this Gdk.Color color)
+		{
+			return new Cairo.Color ((double)color.Red / ushort.MaxValue,
+				(double)color.Green / ushort.MaxValue,
+				(double)color.Blue / ushort.MaxValue);
+		}
+	}
+}
+

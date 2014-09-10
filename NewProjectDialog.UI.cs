@@ -64,6 +64,7 @@ namespace NewProjectDialogTest
 		Label templateNameLabel;
 		Label templateDescriptionLabel;
 		ProjectConfigurationWidget projectConfigurationWidget;
+		TemplateCellRendererText templateTextRenderer;
 
 		void Build ()
 		{
@@ -246,11 +247,11 @@ namespace NewProjectDialogTest
 			iconRenderer.CellBackgroundGdk = templateListBackgroundColor;
 			column.AddAttribute (iconRenderer, "pixbuf", column: 0);
 
-			var textRenderer = new CellRendererText ();
-			textRenderer.CellBackgroundGdk = templateListBackgroundColor;
+			templateTextRenderer = new TemplateCellRendererText ();
+			templateTextRenderer.CellBackgroundGdk = templateListBackgroundColor;
 
-			column.PackStart (textRenderer, true);
-			column.AddAttribute (textRenderer, "markup", column: 1);
+			column.PackStart (templateTextRenderer, true);
+			column.AddAttribute (templateTextRenderer, "markup", column: 1);
 
 			return column;
 		}
