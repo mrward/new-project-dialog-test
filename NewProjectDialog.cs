@@ -47,6 +47,7 @@ namespace NewProjectDialogTest
 			templateCategoriesTreeView.Selection.Changed += TemplateCategoriesTreeViewSelectionChanged;
 			templatesTreeView.Selection.Changed += TemplatesTreeViewSelectionChanged;
 			templatesTreeView.ButtonPressEvent += TemplatesTreeViewButtonPressed;
+			templatesTreeView.Selection.SelectFunction = TemplatesTreeViewSelection;
 			cancelButton.Clicked += CancelButtonClicked;
 			nextButton.Clicked += (sender, e) => MoveToNextPage ();
 			previousButton.Clicked += (sender, e) => MoveToPreviousPage ();
@@ -92,6 +93,19 @@ namespace NewProjectDialogTest
 				};
 				menu.Append (menuItem);
 			}
+		}
+
+		bool TemplatesTreeViewSelection (TreeSelection selection, TreeModel model, TreePath path, bool path_currently_selected)
+		{
+			TreeIter iter;
+			if (model.GetIter (out iter, path)) {
+				var template = templatesListStore.GetValue (iter, TemplateColumn) as SolutionTemplate;
+				if (template == null) {
+					return false;
+				}
+			}
+
+			return true;
 		}
 
 		void TemplateCategoriesTreeViewSelectionChanged (object sender, EventArgs e)
