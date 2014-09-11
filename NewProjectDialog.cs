@@ -65,6 +65,9 @@ namespace NewProjectDialogTest
 			if (templateTextRenderer.IsLanguageButtonPressed (args.Event)) {
 
 				SolutionTemplate template = GetSelectedTemplate ();
+				if (template == null) {
+					return;
+				}
 
 				var menu = new Menu ();
 				menu.AttachToWidget (this, null);
