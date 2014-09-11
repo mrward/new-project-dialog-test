@@ -26,6 +26,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 
 namespace NewProjectDialogTest
 {
@@ -36,6 +37,10 @@ namespace NewProjectDialogTest
 			Id = id;
 			Name = name;
 			IconId = iconId;
+
+			AvailableLanguages = new List<string> ();
+			AvailableLanguages.Add ("C#");
+			AvailableLanguages.Add ("F#");
 		}
 
 		public string Id { get; private set; }
@@ -49,6 +54,8 @@ namespace NewProjectDialogTest
 		public bool HasWizard {
 			get { return !String.IsNullOrEmpty (Wizard); }
 		}
+
+		public IList<string> AvailableLanguages { get; private set; }
 	}
 }
 

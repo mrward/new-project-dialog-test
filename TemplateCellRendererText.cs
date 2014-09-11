@@ -41,6 +41,7 @@ namespace NewProjectDialogTest
 		Rectangle languageRect;
 
 		public SolutionTemplate Template { get; set; }
+		public string SelectedLanguage { get; set; }
 
 		public bool IsLanguageButtonPressed (EventButton button)
 		{
@@ -66,7 +67,7 @@ namespace NewProjectDialogTest
 
 				using (var ctx = CairoHelper.Create (window)) {
 					using (var layout = new Pango.Layout (widget.PangoContext)) {
-						layout.SetMarkup ("C#");
+						layout.SetMarkup (SelectedLanguage);
 
 						int textHeight = 0;
 						int textWidth = 0;

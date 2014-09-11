@@ -42,6 +42,8 @@ namespace NewProjectDialogTest
 		{
 			Build ();
 
+			templateTextRenderer.SelectedLanguage = "C#";
+
 			templateCategoriesTreeView.Selection.Changed += TemplateCategoriesTreeViewSelectionChanged;
 			templatesTreeView.Selection.Changed += TemplatesTreeViewSelectionChanged;
 			templatesTreeView.ButtonPressEvent += TemplatesTreeViewButtonPressed;
@@ -61,12 +63,11 @@ namespace NewProjectDialogTest
 		{
 			if (templateTextRenderer.IsLanguageButtonPressed (args.Event)) {
 
+				SolutionTemplate template = GetSelectedTemplate ();
+
 				var menu = new Menu ();
 				menu.AttachToWidget (this, null);
-				MenuItem menuItem = CreateLanguageMenuItem ("C#");
-				menu.Append (menuItem);
-				menuItem = CreateLanguageMenuItem ("F#");
-				menu.Append (menuItem);
+				AddLanguageMenuItems (menu, template);
 				menu.ModifyBg (StateType.Normal, TemplateCellRendererText.LanguageButtonBackgroundColor);
 				menu.ShowAll ();
 
@@ -81,18 +82,15 @@ namespace NewProjectDialogTest
 			}
 		}
 
-		MenuItem CreateLanguageMenuItem (string language)
+		void AddLanguageMenuItems (Menu menu, SolutionTemplate template)
 		{
-			var menuItem = new MenuItem (language);
-			menuItem.Activated += LanguageMenuItemActivated;
-			return menuItem;
-		}
-
-		void LanguageMenuItemActivated (object sender, EventArgs e)
-		{
-			SolutionTemplate template = GetSelectedTemplate ();
-			if (template != null) {
-				
+			foreach (string language in template.AvailableLanguages) {
+				var menuItem = new MenuItem (language);
+				menuItem.Activated += (o, e) => {
+					templateTextRenderer.SelectedLanguage = language;
+					templatesTreeView.QueueDraw ();
+				};
+				menu.Append (menuItem);
 			}
 		}
 
