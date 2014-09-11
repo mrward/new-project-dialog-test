@@ -80,6 +80,7 @@ namespace NewProjectDialogTest
 		public void Load (ProjectConfiguration projectConfiguration)
 		{
 			this.projectConfiguration = projectConfiguration;
+			folderTreeStore.Clear ();
 			AddProjectWithSolutionDirectoryToTree ();
 		}
 
