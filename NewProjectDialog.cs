@@ -28,7 +28,6 @@
 using System;
 using Gtk;
 using Mono.Unix;
-using Mono.TextEditor;
 using MonoDevelop.Components;
 
 namespace NewProjectDialogTest
@@ -51,6 +50,12 @@ namespace NewProjectDialogTest
 			previousButton.Clicked += (sender, e) => MoveToPreviousPage ();
 		}
 
+		void SetTemplateTextCellData (TreeViewColumn col, CellRenderer renderer, TreeModel model, TreeIter it)
+		{
+			var template = (SolutionTemplate)model.GetValue (it, TemplateColumn);
+			templateTextRenderer.Template = template;
+		}
+
 		[GLib.ConnectBefore]
 		void TemplatesTreeViewButtonPressed (object o, ButtonPressEventArgs args)
 		{
@@ -66,10 +71,10 @@ namespace NewProjectDialogTest
 				menu.ShowAll ();
 
 				MenuPositionFunc posFunc = (Gtk.Menu m, out int x, out int y, out bool pushIn) => {
-					var rect = templateTextRenderer.GetLanguageRect ();
-					var rect2 = GtkUtil.ToScreenCoordinates (templatesTreeView, templatesTreeView.ParentWindow, rect);
-					x = rect2.X;
-					y = rect2.Bottom;
+					Gdk.Rectangle rect = templateTextRenderer.GetLanguageRect ();
+					Gdk.Rectangle screenRect = GtkUtil.ToScreenCoordinates (templatesTreeView, templatesTreeView.ParentWindow, rect);
+					x = screenRect.X;
+					y = screenRect.Bottom;
 					pushIn = false;
 				};
 				menu.Popup (null, null, posFunc, 0, args.Event.Time);

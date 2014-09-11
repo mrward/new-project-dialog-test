@@ -253,6 +253,8 @@ namespace NewProjectDialogTest
 			column.PackStart (templateTextRenderer, true);
 			column.AddAttribute (templateTextRenderer, "markup", column: 1);
 
+			column.SetCellDataFunc (templateTextRenderer, SetTemplateTextCellData);
+
 			return column;
 		}
 	}

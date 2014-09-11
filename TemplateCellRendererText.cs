@@ -40,6 +40,8 @@ namespace NewProjectDialogTest
 		const int languageTextPadding = 10;
 		Rectangle languageRect;
 
+		public SolutionTemplate Template { get; set; }
+
 		public bool IsLanguageButtonPressed (EventButton button)
 		{
 			return languageRect.Contains ((int)button.X, (int)button.Y);
@@ -52,9 +54,13 @@ namespace NewProjectDialogTest
 
 		protected override void Render (Drawable window, Widget widget, Rectangle background_area, Rectangle cell_area, Rectangle expose_area, CellRendererState flags)
 		{
-			StateType stateType = GetState (widget, flags);
-
 			base.Render (window, widget, background_area, cell_area, expose_area, flags);
+
+			if (Template == null) {
+				return;
+			}
+
+			StateType stateType = GetState (widget, flags);
 
 			if (stateType == StateType.Selected) {
 
