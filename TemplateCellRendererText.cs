@@ -36,9 +36,14 @@ namespace NewProjectDialogTest
 	{
 		public static Color LanguageButtonBackgroundColor = new Color (247, 247, 247);
 
-		Color triangleColor = new Color (0, 0, 0);
-		const int languageTextPadding = 10;
+		Color triangleColor = new Color (83, 83, 83);
 		Rectangle languageRect;
+		int dropdownTriangleWidth = 8;
+		int dropdownTriangleHeight = 5;
+		const int languagueButtonRightHandEdgePadding = 10;
+		const int dropdownTriangleRightHandPadding = 8;
+		const int languageRightHandPadding = 4;
+		const int languageLeftHandPadding = 9;
 
 		public SolutionTemplate Template { get; set; }
 		public string SelectedLanguage { get; set; }
@@ -67,7 +72,8 @@ namespace NewProjectDialogTest
 
 				using (var ctx = CairoHelper.Create (window)) {
 					using (var layout = new Pango.Layout (widget.PangoContext)) {
-						layout.SetMarkup (SelectedLanguage);
+						string text = "<span size='smaller'>" + SelectedLanguage + "</span>";
+						layout.SetMarkup (text);
 
 						int textHeight = 0;
 						int textWidth = 0;
@@ -75,18 +81,18 @@ namespace NewProjectDialogTest
 
 						languageRect = GetLanguageButtonRectangle (window, widget, cell_area, textHeight, textWidth);
 
-						//RoundBorder (ctx, alloc.X + 0.5, alloc.Y + 0.5, alloc.Width - 1, alloc.Height - 1);
+						RoundBorder (ctx, languageRect.X + 0.5, languageRect.Y + 0.5, languageRect.Width - 1, languageRect.Height - 1);
 						SetSourceColor (ctx, LanguageButtonBackgroundColor.ToCairoColor ());
-						ctx.Rectangle (languageRect.X, languageRect.Y, languageRect.Width, languageRect.Height);
 						ctx.Fill ();
 
-						int triangleX = languageRect.X + textWidth;
-						int triangleY = languageRect.Y + 10;
-						DrawTriangle (ctx, triangleX, triangleY);
-
+						int lanuageTextX = languageRect.X + languageLeftHandPadding;
+						int languageTextY = languageRect.Y + (languageRect.Height - textHeight) / 2 - 1;
 						layout.FontDescription = widget.PangoContext.FontDescription.Copy ();
-						int languageY = languageRect.Y + (languageRect.Height - textHeight) / 2;
-						window.DrawLayout (widget.Style.TextGC (StateType.Normal), languageRect.X, languageY, layout);
+						window.DrawLayout (widget.Style.TextGC (StateType.Normal), lanuageTextX, languageTextY, layout);
+
+						int triangleX = lanuageTextX + textWidth + languageRightHandPadding;
+						int triangleY = languageRect.Y + (languageRect.Height - dropdownTriangleHeight) / 2;
+						DrawTriangle (ctx, triangleX, triangleY);
 					}
 				}
 			}
@@ -106,27 +112,24 @@ namespace NewProjectDialogTest
 			return stateType;
 		}
 
-		static Rectangle GetLanguageButtonRectangle (Drawable window, Widget widget, Rectangle cell_area, int textHeight, int textWidth)
+		Rectangle GetLanguageButtonRectangle (Drawable window, Widget widget, Rectangle cell_area, int textHeight, int textWidth)
 		{
-			int rightHandEdgePadding = 1;
-			int languageRectangleHeight = cell_area.Height - 4;
-			int languageRectangleWidth = textWidth + 2 * languageTextPadding;
+			int languageRectangleHeight = cell_area.Height - 10;
+			int languageRectangleWidth = textWidth + languageLeftHandPadding + languageRightHandPadding + dropdownTriangleWidth + dropdownTriangleRightHandPadding;
 
 			var dy = (cell_area.Height - languageRectangleHeight) / 2 - 1;
 			var y = cell_area.Y + dy;
-			var x = widget.Allocation.Width - languageRectangleWidth - rightHandEdgePadding;
+			var x = widget.Allocation.Width - languageRectangleWidth - languagueButtonRightHandEdgePadding;
 
 			return new Rectangle (x, y, languageRectangleWidth, languageRectangleHeight);
 		}
 
 		void DrawTriangle (Cairo.Context ctx, int x, int y)
 		{
-			int width = 8;
-			int height = 6;
 			SetSourceColor (ctx, triangleColor.ToCairoColor ());
 			ctx.MoveTo (x, y);
-			ctx.LineTo (x + width, y);
-			ctx.LineTo (x + (width / 2), y + height);
+			ctx.LineTo (x + dropdownTriangleWidth, y);
+			ctx.LineTo (x + (dropdownTriangleWidth / 2), y + dropdownTriangleHeight);
 			ctx.LineTo (x, y);
 			ctx.Fill ();
 		}
