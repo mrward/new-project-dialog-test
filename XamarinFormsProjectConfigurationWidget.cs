@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 //
 
+using System;
 using Gdk;
 using Gtk;
 using Mono.Unix;
@@ -34,11 +35,62 @@ namespace NewProjectDialogTest
 	[System.ComponentModel.ToolboxItem (true)]
 	public partial class XamarinFormsProjectConfigurationWidget : WizardPage
 	{
+		int imageHeight;
+		int imageWidth;
+
 		public XamarinFormsProjectConfigurationWidget ()
 		{
 			this.Build ();
 			mainEventBox.ModifyBg (StateType.Normal, new Color (255, 255, 255));
 			Title = Catalog.GetString ("Configure your Xamarin.Forms app");
+
+			imageHeight = backgroundImage.Pixbuf.Height;
+			imageWidth = backgroundImage.Pixbuf.Width;
+
+			appNameTextBox.Changed += AppNameTextBoxChanged;
+			backgroundImage.ExposeEvent += BackgroundImageExposed;
+		}
+
+		string appName = String.Empty;
+
+		public string AppName {
+			get { return appName; }
+			set {
+				appName = value;
+				if (IsRealized) {
+					QueueDraw ();
+				}
+			}
+		}
+
+		void AppNameTextBoxChanged (object sender, EventArgs e)
+		{
+			AppName = appNameTextBox.Text;
+		}
+
+		void BackgroundImageExposed (object o, ExposeEventArgs args)
+		{
+			using (var layout = new Pango.Layout (backgroundImage.PangoContext)) {
+				int yOffset = (backgroundImage.Allocation.Height - imageHeight) / 2;
+
+				layout.SetMarkup ("<span foreground='#FFFFFF' size='xx-large'>" + GetShortAppName () + "</span>");
+				int x = backgroundImage.Allocation.X + 112;
+				int y = backgroundImage.Allocation.Y + 97 + yOffset;
+				backgroundImage.GdkWindow.DrawLayout (backgroundImage.Style.TextGC (StateType.Normal), x, y, layout);
+
+				layout.SetMarkup ("<span foreground='#FFFFFF' size='larger'>" + appName + "</span>");
+				x = backgroundImage.Allocation.X + 90;
+				y = backgroundImage.Allocation.Y + 152 + yOffset;
+				backgroundImage.GdkWindow.DrawLayout (backgroundImage.Style.TextGC (StateType.Normal), x, y, layout);
+			}
+		}
+
+		string GetShortAppName ()
+		{
+			if (AppName.Length > 2) {
+				return AppName.Substring (0, 2);
+			}
+			return AppName;
 		}
 	}
 }

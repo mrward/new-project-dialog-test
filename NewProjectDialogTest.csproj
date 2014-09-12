@@ -77,13 +77,16 @@
       <LogicalName>md-template-background</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\XamarinFormsConfigurationBackground.png">
-      <LogicalName>md-xamarin-forms-configuration</LogicalName>
+      <LogicalName>md-xamarin-forms-configuration-old</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\generic-folder-osx-16.png">
       <LogicalName>md-generic-folder</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\file-generic-16.png">
       <LogicalName>md-generic-file</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\XamarinFormsConfigurationBackgroundNoText.png">
+      <LogicalName>md-xamarin-forms-configuration</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
