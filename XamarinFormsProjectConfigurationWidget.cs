@@ -36,7 +36,6 @@ namespace NewProjectDialogTest
 	public partial class XamarinFormsProjectConfigurationWidget : WizardPage
 	{
 		int imageHeight;
-		int imageWidth;
 
 		public XamarinFormsProjectConfigurationWidget ()
 		{
@@ -45,7 +44,6 @@ namespace NewProjectDialogTest
 			Title = Catalog.GetString ("Configure your Xamarin.Forms app");
 
 			imageHeight = backgroundImage.Pixbuf.Height;
-			imageWidth = backgroundImage.Pixbuf.Width;
 
 			appNameTextBox.Changed += AppNameTextBoxChanged;
 			backgroundImage.ExposeEvent += BackgroundImageExposed;
