@@ -33,7 +33,8 @@ namespace NewProjectDialogTest
 {
 	public partial class NewProjectDialog : Dialog
 	{
-		Color blueBackgroundColor = new Color (54, 155, 220);
+		Color bannerBackgroundColor = new Color (119, 130, 140);
+		Color bannerLineColor = new Color (112, 122, 131);
 		Color whiteColor = new Color (255, 255, 255);
 		Color categoriesBackgroundColor = new Color (227, 227, 227);
 		Color templateListBackgroundColor = new Color (242, 242, 242);
@@ -82,9 +83,14 @@ namespace NewProjectDialogTest
 			// Top banner of dialog.
 			var topLabelEventBox = new EventBox ();
 			topLabelEventBox.HeightRequest = 53;
-			topLabelEventBox.ModifyBg (StateType.Normal, blueBackgroundColor);
+			topLabelEventBox.ModifyBg (StateType.Normal, bannerBackgroundColor);
 			topLabelEventBox.ModifyFg (StateType.Normal, whiteColor);
 			topLabelEventBox.BorderWidth = 0;
+
+			var topBannerBottomEdgeLineEventBox = new EventBox ();
+			topBannerBottomEdgeLineEventBox.HeightRequest = 1;
+			topBannerBottomEdgeLineEventBox.ModifyBg (StateType.Normal, bannerLineColor);
+			topBannerBottomEdgeLineEventBox.BorderWidth = 0;
 
 			topBannerLabel = new Label ();
 			topBannerLabel.Text = chooseTemplateBannerText;
@@ -97,6 +103,7 @@ namespace NewProjectDialogTest
 			topLabelEventBox.Add (topLabelHBox);
 
 			VBox.PackStart (topLabelEventBox, false, false, 0);
+			VBox.PackStart (topBannerBottomEdgeLineEventBox, false, false, 0);
 
 			// Main templates section.
 			centreVBox = new VBox ();
