@@ -72,11 +72,13 @@ namespace NewProjectDialogTest
 
 				using (var ctx = CairoHelper.Create (window)) {
 					using (var layout = new Pango.Layout (widget.PangoContext)) {
-						string text = "<span size='smaller'>" + SelectedLanguage + "</span>";
-						layout.SetMarkup (text);
+
+						int maxTextHeight = GetLargestTextHeight (layout);
 
 						int textHeight = 0;
 						int textWidth = 0;
+
+						SetMarkup (layout, SelectedLanguage);
 						layout.GetPixelSize (out textHeight, out textWidth);
 
 						languageRect = GetLanguageButtonRectangle (window, widget, cell_area, textHeight, textWidth);
@@ -86,7 +88,7 @@ namespace NewProjectDialogTest
 						ctx.Fill ();
 
 						int lanuageTextX = languageRect.X + languageLeftHandPadding;
-						int languageTextY = languageRect.Y + (languageRect.Height - textHeight) / 2 - 1;
+						int languageTextY = languageRect.Y + (languageRect.Height - maxTextHeight) / 2 - 1;
 						layout.FontDescription = widget.PangoContext.FontDescription.Copy ();
 						window.DrawLayout (widget.Style.TextGC (StateType.Normal), lanuageTextX, languageTextY, layout);
 
@@ -110,6 +112,22 @@ namespace NewProjectDialogTest
 			if ((flags & CellRendererState.Selected) != 0)
 				stateType = widget.HasFocus ? StateType.Selected : StateType.Active;
 			return stateType;
+		}
+
+		int GetLargestTextHeight (Pango.Layout layout)
+		{
+			int textHeight = 0;
+			int textWidth = 0;
+			SetMarkup (layout, "W");
+			layout.GetPixelSize (out textHeight, out textWidth);
+
+			return textHeight;
+		}
+
+		void SetMarkup (Pango.Layout layout, string text)
+		{
+			string markup = "<span size='smaller'>" + text + "</span>";
+			layout.SetMarkup (markup);
 		}
 
 		Rectangle GetLanguageButtonRectangle (Drawable window, Widget widget, Rectangle cell_area, int textHeight, int textWidth)
