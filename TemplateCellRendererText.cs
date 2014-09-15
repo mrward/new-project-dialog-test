@@ -73,8 +73,6 @@ namespace NewProjectDialogTest
 				using (var ctx = CairoHelper.Create (window)) {
 					using (var layout = new Pango.Layout (widget.PangoContext)) {
 
-						int maxTextHeight = GetLargestTextHeight (layout);
-
 						int textHeight = 0;
 						int textWidth = 0;
 
@@ -88,8 +86,8 @@ namespace NewProjectDialogTest
 						ctx.Fill ();
 
 						int lanuageTextX = languageRect.X + languageLeftHandPadding;
-						int languageTextY = languageRect.Y + (languageRect.Height - maxTextHeight) / 2 - 1;
-						layout.FontDescription = widget.PangoContext.FontDescription.Copy ();
+						int languageTextY = languageRect.Y + (languageRect.Height - textHeight) / 2;
+
 						window.DrawLayout (widget.Style.TextGC (StateType.Normal), lanuageTextX, languageTextY, layout);
 
 						int triangleX = lanuageTextX + textWidth + languageRightHandPadding;
@@ -112,16 +110,6 @@ namespace NewProjectDialogTest
 			if ((flags & CellRendererState.Selected) != 0)
 				stateType = widget.HasFocus ? StateType.Selected : StateType.Active;
 			return stateType;
-		}
-
-		int GetLargestTextHeight (Pango.Layout layout)
-		{
-			int textHeight = 0;
-			int textWidth = 0;
-			SetMarkup (layout, "W");
-			layout.GetPixelSize (out textHeight, out textWidth);
-
-			return textHeight;
 		}
 
 		void SetMarkup (Pango.Layout layout, string text)
