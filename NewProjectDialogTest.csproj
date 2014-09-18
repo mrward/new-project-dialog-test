@@ -48,30 +48,12 @@
     <Reference Include="atk-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
-    <Reference Include="Mono.Cairo, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\CrossPlatformCategory.png">
-      <LogicalName>md-crossplatform-category</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\iOSCategory.png">
-      <LogicalName>md-ios-category</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\AndroidCategory.png">
-      <LogicalName>md-android-category</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\OSXCategory.png">
-      <LogicalName>md-osx-category</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\OtherCategory.png">
-      <LogicalName>md-other-category</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\Template.png">
-      <LogicalName>md-project-template</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\TemplateBackground.png">
       <LogicalName>md-template-background</LogicalName>
@@ -79,14 +61,62 @@
     <EmbeddedResource Include="Images\XamarinFormsConfigurationBackground.png">
       <LogicalName>md-xamarin-forms-configuration-old</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\generic-folder-osx-16.png">
-      <LogicalName>md-generic-folder</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Images\file-generic-16.png">
-      <LogicalName>md-generic-file</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Images\XamarinFormsConfigurationBackgroundNoText.png">
       <LogicalName>md-xamarin-forms-configuration</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\platform-cross-platform-16.png">
+      <LogicalName>platform-cross-platform-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\platform-cross-platform-16%402x.png">
+      <LogicalName>platform-cross-platform-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\platform-android-16.png">
+      <LogicalName>platform-android-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\platform-android-16%402x.png">
+      <LogicalName>platform-android-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\platform-ios-16.png">
+      <LogicalName>platform-ios-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\platform-ios-16%402x.png">
+      <LogicalName>platform-ios-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\platform-mac-16.png">
+      <LogicalName>platform-mac-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\platform-mac-16%402x.png">
+      <LogicalName>platform-mac-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\platform-other-16.png">
+      <LogicalName>platform-other-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\platform-other-16%402x.png">
+      <LogicalName>platform-other-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\file-generic-16.png">
+      <LogicalName>file-generic-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\file-generic-16%402x.png">
+      <LogicalName>file-generic-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\folder-generic-mac-16.png">
+      <LogicalName>folder-generic-mac-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\folder-generic-mac-16%402x.png">
+      <LogicalName>folder-generic-mac-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\folder-generic-win-16.png">
+      <LogicalName>folder-generic-win-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\folder-generic-win-16%402x.png">
+      <LogicalName>folder-generic-win-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\project-32.png">
+      <LogicalName>project-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons\project-32%402x.png">
+      <LogicalName>project-32@2x.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -95,9 +125,7 @@
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NewProjectDialog.cs">
-      <LogicalName>CrossPlatformCategory.png</LogicalName>
-    </Compile>
+    <Compile Include="NewProjectDialog.cs" />
     <Compile Include="NewProjectDialog.UI.cs">
       <DependentUpon>NewProjectDialog.cs</DependentUpon>
     </Compile>
@@ -123,5 +151,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="Images\icons\" />
   </ItemGroup>
 </Project>

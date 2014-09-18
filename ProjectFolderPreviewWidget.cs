@@ -34,8 +34,8 @@ namespace NewProjectDialogTest
 	[System.ComponentModel.ToolboxItem (true)]
 	public partial class ProjectFolderPreviewWidget : Gtk.Bin
 	{
-		Pixbuf folderImage = new Pixbuf (typeof(ProjectFolderPreviewWidget).Assembly, "md-generic-folder");
-		Pixbuf fileImage = new Pixbuf (typeof(ProjectFolderPreviewWidget).Assembly, "md-generic-file");
+		Pixbuf folderImage = new Pixbuf (typeof(ProjectFolderPreviewWidget).Assembly, "folder-generic-mac-16.png"); // FIXME: VV: Retina, on Windows folder-generic-win-16.png
+		Pixbuf fileImage = new Pixbuf (typeof(ProjectFolderPreviewWidget).Assembly, "file-generic-16.png"); // FIXME: VV: Retina
 
 		const int TextColumn = 1;
 		TreeStore folderTreeStore;

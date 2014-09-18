@@ -47,13 +47,13 @@ namespace NewProjectDialogTest
 			templateCategories = new List<TemplateCategory> ();
 
 			var generalCategory = new TemplateCategory ("general", "General", null);
-			var template = new SolutionTemplate ("blank-app-portable", "Blank App (Xamarin.Forms Portable)", "md-project-template") {
+			var template = new SolutionTemplate ("blank-app-portable", "Blank App (Xamarin.Forms Portable)", "project-32.png") { // FIXME: VV: Retina
 				Description = "Blank App (Xamarin.Forms Portable). More text and some more. Blah, blah, blah, blah, more text that should wrap. More and more. More and even more",
 				LargeImageId = "md-template-background",
 				Wizard = "Xamarin.Forms.Template.Wizard"
 			};
 			generalCategory.AddTemplate (template);
-			template = new SolutionTemplate ("blank-app-shared", "Blank App (Xamarin.Forms Shared)", "md-project-template") {
+			template = new SolutionTemplate ("blank-app-shared", "Blank App (Xamarin.Forms Shared)", "project-32.png") { // FIXME: VV: Retina
 				Description = "Blank App (Xamarin.Forms Shared)",
 				LargeImageId = "md-template-background"
 			};
@@ -65,32 +65,32 @@ namespace NewProjectDialogTest
 			var libraryCategory = new TemplateCategory ("library", "Library", null);
 			var testsCategory = new TemplateCategory ("test", "Tests", null);
 
-			var crossPlatformCategory = new TemplateCategory ("CrossPlat", "Cross-platform", "md-crossplatform-category");
+			var crossPlatformCategory = new TemplateCategory ("CrossPlat", "Cross-platform", "platform-cross-platform-16.png"); // FIXME: VV: Retina
 			crossPlatformCategory.AddCategory (appCategory);
 			crossPlatformCategory.AddCategory (libraryCategory);
 			crossPlatformCategory.AddCategory (testsCategory);
 			templateCategories.Add (crossPlatformCategory);
 
-			var iosCategory = new TemplateCategory ("ios", "iOS", "md-ios-category");
+			var iosCategory = new TemplateCategory ("ios", "iOS", "platform-ios-16.png"); // FIXME: VV: Retina
 			iosCategory.AddCategory (appCategory);
 			iosCategory.AddCategory (libraryCategory);
 			iosCategory.AddCategory (testsCategory);
 			templateCategories.Add (iosCategory);
 
-			var androidCategory = new TemplateCategory ("android", "Android", "md-android-category");
+			var androidCategory = new TemplateCategory ("android", "Android", "platform-android-16.png"); // FIXME: VV: Retina
 			androidCategory.AddCategory (appCategory);
 			androidCategory.AddCategory (libraryCategory);
 			androidCategory.AddCategory (testsCategory);
 			templateCategories.Add (androidCategory);
 
-			var osxCategory = new TemplateCategory ("osx", "OS X", "md-osx-category");
+			var osxCategory = new TemplateCategory ("osx", "OS X", "platform-mac-16.png"); // FIXME: VV: Retina
 			osxCategory.AddCategory (appCategory);
 			osxCategory.AddCategory (libraryCategory);
 			templateCategories.Add (osxCategory);
 
 			var aspNetCategory = new TemplateCategory ("aspnet", "ASP.NET", null);
 			var miscCategory = new TemplateCategory ("misc", "Miscellaneous", null);
-			var otherCategory = new TemplateCategory ("other", "Other", "md-other-category");
+			var otherCategory = new TemplateCategory ("other", "Other", "platform-other-16.png"); // FIXME: VV: Retina
 			otherCategory.AddCategory (aspNetCategory);
 			otherCategory.AddCategory (miscCategory);
 			templateCategories.Add (otherCategory);
